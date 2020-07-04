@@ -58,10 +58,15 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
+##### Change theme
+```bash
+nano .zshrc
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
 ##### Copy dotfile
 
 ```bash
-cp ~/dotfile-server/.zshrc ~/.zshrc
 cp ~/dotfile-server/.p10k.zsh ~/.p10k.zsh
 
 source ~/.zshrc
