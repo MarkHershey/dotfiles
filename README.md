@@ -51,6 +51,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 
+### [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+
+##### Install zsh-syntax-highlighting into Oh My ZSH plugins folder 
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+
 ### [Powerlevel 10k](https://github.com/romkatv/powerlevel10k)
 
 ##### Install Powerlevel 10k
@@ -67,6 +75,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ##### Copy dotfile
 
 ```bash
+cp ~/dotfile-server/.p10k.zsh ~/.zshrc
 cp ~/dotfile-server/.p10k.zsh ~/.p10k.zsh
 
 source ~/.zshrc

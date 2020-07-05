@@ -75,9 +75,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+
+plugins=(git docker colorize sudo command-not-found zsh-syntax-highlighting)
+# plugins:
+# colorize: use `ccat <file>` to cat file with syntax highlighted
+# sudo: By pressing the esc key twice, add sudo prefixed without typing.
+# zsh-syntax-highlighting: shell command highlighting
 
 source $ZSH/oh-my-zsh.sh
 
