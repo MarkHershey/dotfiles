@@ -9,7 +9,7 @@ git clone https://github.com/MarkHershey/dotfile-server.git
 
 ### [ZSH (Z Shell)](http://zsh.sourceforge.net/)
 
-##### Install Oh My ZSH
+##### Install ZSH
 For Ubuntu:
 
 ```bash
