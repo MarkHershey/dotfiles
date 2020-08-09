@@ -4,7 +4,7 @@
 ### Clone this repo
 ```bash
 cd ~
-git clone https://github.com/MarkHershey/dotfile-server.git
+git clone https://github.com/MarkHershey/dotfiles.git
 ```
 
 ### Shell: [ZSH (Z Shell)](http://zsh.sourceforge.net/)
@@ -72,7 +72,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~
 ##### Copy dotfile
 
 ```bash
-cp ~/dotfile-server/.zshrc ~/.zshrc
+cp ~/dotfiles/.zshrc ~/.zshrc
 source ~/.zshrc
 ```
 
