@@ -1,13 +1,14 @@
 # dotfiles
 
+*dotfiles for shell setup*
 
-### Clone this repo
+## 0 - Clone this repo
 ```bash
 cd ~
 git clone https://github.com/MarkHershey/dotfiles.git
 ```
 
-### Shell: [ZSH (Z Shell)](http://zsh.sourceforge.net/)
+## 1 - Shell: [ZSH (Z Shell)](http://zsh.sourceforge.net/)
 
 ##### Install ZSH
 For Ubuntu:
@@ -37,7 +38,7 @@ echo $SHELL
 
 should return `/usr/bin/zsh` or `/bin/zsh` or similar.
 
-### Plugin Manager for ZSH: [Oh My ZSH](https://github.com/ohmyzsh/ohmyzsh)
+## 2 - Plugin Manager for ZSH: [Oh My ZSH](https://github.com/ohmyzsh/ohmyzsh)
 
 ##### Install Oh My ZSH
 ```bash
@@ -51,7 +52,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 
-### ZSH Plugin: [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+## 3 - ZSH Plugin: [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 ##### Install zsh-syntax-highlighting into Oh My ZSH plugins folder
 ```bash
@@ -59,7 +60,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 ```
 
 
-### ZSH Theme: [Powerlevel 10k](https://github.com/romkatv/powerlevel10k)
+## 4 - ZSH Theme: [Powerlevel 10k](https://github.com/romkatv/powerlevel10k)
 
 ##### Install Powerlevel 10k
 ```bash
@@ -68,20 +69,25 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~
 
 ##### Install Font `MesloLGS NF`
 - [Manual font installation](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+- Select `MesloLGS NF` as font in terminal's preference setting.
 
-##### Copy dotfile
+##### Copy `ZSH` dotfile
 
 ```bash
-cp ~/dotfiles/.zshrc ~/.zshrc
-source ~/.zshrc
+cp ~/dotfiles/.zshrc ~/.zshrc && source ~/.zshrc
 ```
 
-##### Launch Configuration Wizard
+##### Option 1: Launch `p10k` configuration wizard
 ```bash
 p10k configure
 ```
 
-### Text Editor: Vim
+##### Option 2: Copy `p10k` dotfile
+```bash
+cp ~/dotfiles/.p10k.zsh ~/.p10k.zsh && source ~/.p10k.zsh
+```
+
+## 5 - Text Editor: Vim
 
 ##### Install Vim
 ```bash
@@ -95,7 +101,7 @@ vim --version
 
 - pls refers to [MarkHershey / vimrc](https://github.com/MarkHershey/vimrc)
 
-### Others
+## 6 - Others
 
 ```bash
 sudo apt-get install libncurses5-dev libncursesw5-dev
