@@ -1,5 +1,7 @@
 # dotfiles
 
+![](https://github.com/MarkHershey/dotfiles/workflows/Shellcheck/badge.svg?branch=master)
+
 *dotfiles for shell setup*
 
 ## 0 - Clone this repo
