@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -82,7 +83,7 @@ plugins=(git docker colorize sudo command-not-found zsh-syntax-highlighting)
 # sudo: By pressing the esc key twice, add sudo prefixed without typing.
 # zsh-syntax-highlighting: shell command highlighting
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
