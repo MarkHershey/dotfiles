@@ -14,4 +14,4 @@ jobs:
           SHELLCHECK_OPTS: -e SC2059 -e SC2034 -e SC1090 -e SC1091
         with:
           severity: error
-          ignore: p10k.zsh
+          ignore: p10k

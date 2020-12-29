@@ -89,13 +89,13 @@ if [ -f ~/.zshrc ]; then
     echo "~/.zshrc exists, backing it up before overwriting."
     mv ~/.zshrc ~/.zshrc.backup
 fi
-ln -s "${BASEDIR}/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
+ln -s "${BASEDIR}/zsh/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
 source ~/.zshrc || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # p10k
 p_header "linking .p10k.zsh"
-ln -s "${BASEDIR}/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
+ln -s "${BASEDIR}/p10k/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
 source ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
