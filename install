@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# reference: https://github.com/anishathalye/dotfiles
+# reference: https://github.com/dhruvmanila/dotfiles
+
+
+declare -i exitcode
+exitcode=0
+
+# dotfiles directory
+declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
+declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
+declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
+
+# Header logging
+function e_header {
+    printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
+}
+
+# Success logging
+function e_success {
+    printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
+}
+
+# get base directory
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# vim
+e_header "linking .vimrc"
+ln -s ${BASEDIR}/vimrc ~/.vimrc || { echo "Failed" >&2;exit 1; }
+e_success "Done"
+
+e_header "linking .vim"
+ln -s ${BASEDIR}/vim/ ~/.vim || { echo "Failed" >&2;exit 1; }
+e_success "Done"
+
+# zsh
+e_header "linking .zshrc"
+ln -s ${BASEDIR}/.zshrc ~/.zshrc || { echo "Failed" >&2;exit 1; }
+e_success "Done"
+
+# git
+# ln -s ${BASEDIR}/gitconfig ~/.gitconfig
+
+
+# ----------------------------------------------------
+exit ${exitcode}
