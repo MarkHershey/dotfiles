@@ -12,3 +12,6 @@ jobs:
         uses: ludeeus/action-shellcheck@master
         env:
           SHELLCHECK_OPTS: -e SC2059 -e SC2034 -e SC1090 -e SC1091
+        with:
+          severity: error
+          ignore: p10k.zsh

@@ -19,7 +19,6 @@
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
-# shellcheck disable=SC1073,SC1072
 () {
   emulate -L zsh -o extended_glob
 

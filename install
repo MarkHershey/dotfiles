@@ -8,9 +8,9 @@ declare -i exitcode
 exitcode=0
 
 # dotfiles directory
-declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
-declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
-declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
+# declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
+# declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
+# declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
 # Header logging
 function p_header {
@@ -44,7 +44,7 @@ p_success "Done"
 # default shell
 
 p_header "change default shell to zsh"
-{ chsh -s "$(which zsh)" && echo $SHELL; } || { echo "Failed" >&2;exit 1; }
+{ chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
@@ -58,14 +58,14 @@ p_success "Done"
 # Zsh Syntax Highlighting
 
 p_header "install Zsh Syntax Highlighting"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || { echo "Failed" >&2;exit 1; }
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Zsh Syntax Highlighting
 
 p_header "install Powerlevel 10k"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k || { echo "Failed" >&2;exit 1; }
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 
@@ -84,9 +84,10 @@ p_success "Done"
 
 # zsh
 p_header "linking .zshrc"
-if [ -f "~/.zshrc" ]; then
+if [ -f ~/.zshrc ]; then
+    # shellcheck disable=SC2088
     echo "~/.zshrc exists, backing it up before overwriting."
-    mv "~/.zshrc" "~/.zshrc.backup"
+    mv ~/.zshrc ~/.zshrc.backup
 fi
 ln -s "${BASEDIR}/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
 source ~/.zshrc || { echo "Failed" >&2;exit 1; }
