@@ -36,7 +36,7 @@ git \
 tmux \
 tree \
 make \
-build-essential } || { echo "Failed" >&2;exit 1; }
+build-essential; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 
@@ -44,7 +44,7 @@ p_success "Done"
 # default shell
 
 p_header "change default shell to zsh"
-{ chsh -s $(which zsh) && echo $SHELL } || { echo "Failed" >&2;exit 1; }
+{ chsh -s "$(which zsh)" && echo $SHELL; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
