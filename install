@@ -51,7 +51,7 @@ p_success "Done"
 # Oh My ZSH
 
 p_header "install Oh My ZSH"
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || { echo "Failed" >&2;exit 1; }
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
