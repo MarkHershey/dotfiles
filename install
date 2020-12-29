@@ -3,7 +3,7 @@
 # reference: https://github.com/anishathalye/dotfiles
 # reference: https://github.com/dhruvmanila/dotfiles
 
-
+# declare integer
 declare -i exitcode
 exitcode=0
 
@@ -13,31 +13,91 @@ declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/m
 declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
 # Header logging
-function e_header {
+function p_header {
     printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
 }
 
 # Success logging
-function e_success {
+function p_success {
     printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
 }
 
+# ----------------------------------------------------
+# zsh 
+
+p_header "install wget zsh vim git tmux etc..."
+{ sudo apt-get remove --assume-yes vim-tiny && \
+sudo apt-get update && \
+sudo apt-get install -y --no-install-recommends \
+wget \
+zsh \
+vim \
+git \
+tmux \
+tree \
+make \
+build-essential } || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+
+# ----------------------------------------------------
+# default shell
+
+p_header "change default shell to zsh"
+{ chsh -s $(which zsh) && echo $SHELL } || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# ----------------------------------------------------
+# Oh My ZSH
+
+p_header "install Oh My ZSH"
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# ----------------------------------------------------
+# Zsh Syntax Highlighting
+
+p_header "install Zsh Syntax Highlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# ----------------------------------------------------
+# Zsh Syntax Highlighting
+
+p_header "install Powerlevel 10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+
+# ----------------------------------------------------
 # get base directory
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # vim
-e_header "linking .vimrc"
-ln -s ${BASEDIR}/vimrc ~/.vimrc || { echo "Failed" >&2;exit 1; }
-e_success "Done"
+p_header "linking .vimrc"
+ln -s "${BASEDIR}/vimrc/vimrc" ~/.vimrc || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
-e_header "linking .vim"
-ln -s ${BASEDIR}/vim/ ~/.vim || { echo "Failed" >&2;exit 1; }
-e_success "Done"
+p_header "linking .vim"
+ln -s "${BASEDIR}/vim/" ~/.vim || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
 # zsh
-e_header "linking .zshrc"
-ln -s ${BASEDIR}/.zshrc ~/.zshrc || { echo "Failed" >&2;exit 1; }
-e_success "Done"
+p_header "linking .zshrc"
+ln -s "${BASEDIR}/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
+source ~/.zshrc || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# p10k
+p_header "linking .p10k.zsh"
+ln -s "${BASEDIR}/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
+source ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# tmux
+p_header "linking .tmux.conf"
+ln -s "${BASEDIR}/tmux/tmux.conf" ~/.tmux.conf || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
 # git
 # ln -s ${BASEDIR}/gitconfig ~/.gitconfig
