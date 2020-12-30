@@ -14,17 +14,17 @@ exitcode=0
 
 # define colors
 green=$(tput setaf 2)
-blue=$(tput setaf 6)
+blue=$(tput setaf 4)
 normal=$(tput sgr0)
 
 # Header logging
 function p_header {
-    printf "\n${blue}%s\n--------------------------------${normal}\n" "$@"
+    printf "\n${blue}%s${normal}\n--------------------------------\n" "$@"
 }
 
 # Success logging
 function p_success {
-    printf "${green}✓ %s${normal}\n" "$@"
+    printf "${green}✓ %s${normal}\n\n" "$@"
 }
 
 
@@ -49,9 +49,9 @@ p_success "Done"
 # ----------------------------------------------------
 # default shell
 
-p_header "Change default shell to zsh"
-{ chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
-p_success "Done"
+# p_header "Change default shell to zsh"
+# { chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
+# p_success "Done"
 
 # ----------------------------------------------------
 # Oh My ZSH
@@ -64,14 +64,14 @@ p_success "Done"
 # Zsh Syntax Highlighting
 
 p_header "Install Zsh Syntax Highlighting"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/.oh-my-zsh/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Zsh Syntax Highlighting
 
 p_header "Install Powerlevel 10k"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${HOME}/.oh-my-zsh/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 
@@ -111,7 +111,7 @@ p_success "Done"
 # git
 # ln -s ${BASEDIR}/gitconfig ~/.gitconfig
 
-p_success "\n------ All Completed ------"
+p_success "------ All Completed ------"
 
 # ----------------------------------------------------
 exit ${exitcode}
