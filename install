@@ -49,9 +49,10 @@ p_success "Done"
 # ----------------------------------------------------
 # default shell
 
-# p_header "Change default shell to zsh"
+p_header "Change default shell to zsh"
 # { chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
-# p_success "Done"
+{ sudo chsh $USER -s $(which zsh) && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
 # ----------------------------------------------------
 # Oh My ZSH
