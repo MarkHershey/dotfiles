@@ -12,15 +12,19 @@ exitcode=0
 # declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
 # declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
+# define colors
+green=$(tput setaf 2)
+blue=$(tput setaf 6)
+normal=$(tput sgr0)
+
 # Header logging
 function p_header {
-    printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
-    printf "--------------------------------"
+    printf "\n${blue}%s\n--------------------------------${normal}\n" "$@"
 }
 
 # Success logging
 function p_success {
-    printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
+    printf "${green}✓ %s${normal}\n" "$@"
 }
 
 
@@ -45,9 +49,9 @@ p_success "Done"
 # ----------------------------------------------------
 # default shell
 
-# p_header "Change default shell to zsh"
-# { chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
-# p_success "Done"
+p_header "Change default shell to zsh"
+{ chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
 # ----------------------------------------------------
 # Oh My ZSH
@@ -92,13 +96,11 @@ if [ -f ~/.zshrc ]; then
     mv ~/.zshrc ~/.zshrc.backup
 fi
 ln -s "${BASEDIR}/zsh/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
-source ~/.zshrc || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # p10k
 p_header "Linking .p10k.zsh"
 ln -s "${BASEDIR}/p10k/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
-source ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # tmux
@@ -109,6 +111,7 @@ p_success "Done"
 # git
 # ln -s ${BASEDIR}/gitconfig ~/.gitconfig
 
+p_success "\n------ All Completed ------"
 
 # ----------------------------------------------------
 exit ${exitcode}
