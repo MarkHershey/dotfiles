@@ -16,4 +16,4 @@ jobs:
       - run: |
           pwd
       - run: |
-          cd "$GITHUB_WORKSPACE" && pwd && ./install
+          ./install
