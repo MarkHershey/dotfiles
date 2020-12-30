@@ -8,13 +8,14 @@ declare -i exitcode
 exitcode=0
 
 # dotfiles directory
-# declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
-# declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
-# declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
+declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
+declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
+declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
 # Header logging
 function p_header {
     printf "\n$(tput setaf 7)%s$(tput sgr0)\n" "$@"
+    printf "--------------------------------"
 }
 
 # Success logging
@@ -22,10 +23,21 @@ function p_success {
     printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
 }
 
+# -----------------------------------------------------
+
+# If missing, download and extract the dotfiles repository
+# if [ ! -d "${DOTFILES_DIRECTORY}" ]; then
+#     printf "\n$(tput setaf 7)Downloading dotfiles...\033[m\n"
+#     git clone "$DOTFILES_GIT_REMOTE" "$HOME"
+# fi
+
+
+
+
 # ----------------------------------------------------
 # zsh 
 
-p_header "install wget zsh vim git tmux etc..."
+p_header "Install wget zsh vim git tmux etc..."
 { sudo apt-get remove --assume-yes vim-tiny && \
 sudo apt-get update && \
 sudo apt-get install -y --no-install-recommends \
@@ -43,28 +55,28 @@ p_success "Done"
 # ----------------------------------------------------
 # default shell
 
-p_header "change default shell to zsh"
+p_header "Change default shell to zsh"
 { chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Oh My ZSH
 
-p_header "install Oh My ZSH"
+p_header "Install Oh My ZSH"
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Zsh Syntax Highlighting
 
-p_header "install Zsh Syntax Highlighting"
+p_header "Install Zsh Syntax Highlighting"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Zsh Syntax Highlighting
 
-p_header "install Powerlevel 10k"
+p_header "Install Powerlevel 10k"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
@@ -74,16 +86,16 @@ p_success "Done"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # vim
-p_header "linking .vimrc"
+p_header "Linking .vimrc"
 ln -s "${BASEDIR}/vimrc/vimrc" ~/.vimrc || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
-p_header "linking .vim"
+p_header "Linking .vim"
 ln -s "${BASEDIR}/vim/" ~/.vim || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # zsh
-p_header "linking .zshrc"
+p_header "Linking .zshrc"
 if [ -f ~/.zshrc ]; then
     # shellcheck disable=SC2088
     echo "~/.zshrc exists, backing it up before overwriting."
@@ -94,13 +106,13 @@ source ~/.zshrc || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # p10k
-p_header "linking .p10k.zsh"
+p_header "Linking .p10k.zsh"
 ln -s "${BASEDIR}/p10k/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
 source ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # tmux
-p_header "linking .tmux.conf"
+p_header "Linking .tmux.conf"
 ln -s "${BASEDIR}/tmux/tmux.conf" ~/.tmux.conf || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 

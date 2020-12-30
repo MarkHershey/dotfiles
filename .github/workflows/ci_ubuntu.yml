@@ -12,4 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          ./install
+          apt-get update && apt-get install -y sudo git
+      - run: |
+          git clone https://github.com/MarkHershey/dotfiles.git "$HOME"
+      - run: |
+          cd "${HOME}/dotfiles" && ./install
