@@ -7,10 +7,10 @@
 declare -i exitcode
 exitcode=0
 
-# dotfiles directory
-declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
-declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
-declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
+# # dotfiles directory
+# declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
+# declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
+# declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
 # Header logging
 function p_header {
@@ -22,16 +22,6 @@ function p_header {
 function p_success {
     printf "$(tput setaf 64)✓ %s$(tput sgr0)\n" "$@"
 }
-
-# -----------------------------------------------------
-
-# If missing, download and extract the dotfiles repository
-# if [ ! -d "${DOTFILES_DIRECTORY}" ]; then
-#     printf "\n$(tput setaf 7)Downloading dotfiles...\033[m\n"
-#     git clone "$DOTFILES_GIT_REMOTE" "$HOME"
-# fi
-
-
 
 
 # ----------------------------------------------------

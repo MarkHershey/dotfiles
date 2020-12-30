@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # - run: |
+      #     sudo apt-get update && sudo apt-get install -y sudo git
       - run: |
-          sudo apt-get update && sudo apt-get install -y sudo git
+          pwd
       - run: |
-          if [ ! -d "${HOME}/dotfiles" ]; then git clone "https://github.com/MarkHershey/dotfiles.git" "$HOME"; fi
-      - run: |
-          cd "${HOME}/dotfiles" && ./install
+          cd "$GITHUB_WORKSPACE" && pwd && ./install
