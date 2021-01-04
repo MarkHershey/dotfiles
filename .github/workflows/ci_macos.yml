@@ -1,0 +1,17 @@
+name: CI-macOS
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 8 * * 6'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run macOS Setup Script
+        run: sudo bash macos/macOS_custom_setup.sh
+        shell: bash
