@@ -82,7 +82,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # vim
 p_header "Linking .vimrc"
-ln -s "${BASEDIR}/vimrc/vimrc" ~/.vimrc || { echo "Failed" >&2;exit 1; }
+ln -s "${BASEDIR}/vim/vimrc" ~/.vimrc || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 p_header "Linking .vim"

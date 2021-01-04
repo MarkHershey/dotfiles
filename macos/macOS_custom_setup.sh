@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# ref: https://github.com/donnemartin/dev-setup/blob/master/osx.sh
+
+
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -205,9 +208,10 @@ defaults write com.apple.screensaver askForPasswordDelay -int 3
 defaults write com.apple.finder NewWindowTarget -string "PfDe"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
 
-# Show icons for hard drives, servers, and removable media on the desktop
+# Not showing HardDrives On Desktop
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+# Show ExternalHardDrives, MountedServers, RemovableMedia On Desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
