@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+FILE=.gitignore
+
+if [ -f "$FILE" ]; then
+    echo "$FILE exist"
+else
+    echo "$FILE does not exist"
+    echo "Creating $FILE"
+    touch .gitignore
+    echo "**/.DS_Store" > .gitignore
+    echo "Committing $FILE"
+    git add .gitignore
+    git commit -m "ignore .DS_Store"
+    git push origin master
+
+fi

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo Who are you?
+
+read who
+
+echo Hello,$who! How old are you?
+
+read age
+
+if [ $age -gt 18 ]
+then
+    echo You can drink.
+else
+    echo You are too young to drink.
+fi
