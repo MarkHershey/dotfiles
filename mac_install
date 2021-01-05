@@ -18,7 +18,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ----------------------------------------------------
 
 source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
-source "${BASEDIR}/lib/brew"  || { echo "Failed to source brew" >&2;exit 1; }
+# source "${BASEDIR}/lib/brew"  || { echo "Failed to source brew" >&2;exit 1; }
 
 # change to the dotfiles directory
 # For some unknown reason it doesn't exist, exit!
