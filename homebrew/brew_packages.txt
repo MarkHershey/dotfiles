@@ -1,0 +1,5 @@
+tree
+tmux
+vim
+wget
+ffmpeg

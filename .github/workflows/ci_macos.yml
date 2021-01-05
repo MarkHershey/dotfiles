@@ -13,5 +13,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Run macOS Setup Script
-        run: sudo bash macos/macOS_custom_setup.sh
-        shell: bash
+        run: sudo zsh mac_install
+        shell: zsh

@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+
+declare -i exitcode
+exitcode=0
+
+# dotfiles directory
+DOTFILES_DIRECTORY="${HOME}/dotfiles"
+
+# get base directory
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# If missing, download and extract the dotfiles repository
+# if [ ! -d "${DOTFILES_DIRECTORY}" ]; then
+#     echo "missing dotfiles, abort."
+#     exit 1
+# fi
+
+# ----------------------------------------------------
+
+source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
+source "${BASEDIR}/lib/brew"  || { echo "Failed to source brew" >&2;exit 1; }
+
+# change to the dotfiles directory
+# For some unknown reason it doesn't exist, exit!
+# p_header "Changing to the ${DOTFILES_DIRECTORY} directory"
+# cd "${DOTFILES_DIRECTORY}" || { echo "Failed to change directory to ${DOTFILES_DIRECTORY}" >&2;exit 1; }
+# p_success "Done"
+
+# ----------------------------------------------------
+
+# Before relying on Homebrew, check that packages can be compiled by making sure
+p_header "Checking for xcode command line tools..."
+if ! xcode-select -p > /dev/null; then
+    printf "Installing xcode command line tools...\n"
+    xcode-select --install > /dev/null
+
+    # wait until the tools are installed...
+    until xcode-select -p > /dev/null; do
+        sleep 5;
+    done
+    # making sure we installed it
+    if xcode-select -p > /dev/null; then
+        p_success "Successfully installed xcode command line tools."
+    else
+        p_error "Failed to install xcode command line tools."
+        exit 1
+    fi
+else
+    p_success "xcode command line tools already installed."
+fi
+
+# ----------------------------------------------------
+
+# Check for Homebrew
+# Install homebrew and all the requested packages
+p_header "Checking for homebrew..."
+if ! type_exists 'brew'; then
+    p_header "Installing Homebrew..."
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    if type_exists 'brew'; then
+        p_success "Successfully installed homebrew"
+        # p_header "Installing packages..."
+        # run_brew
+    else
+        p_error "Failed to install homebrew."
+        exit 1
+    fi
+else
+    p_success "Homebrew already installed."
+    # p_header "Updating packages..."
+    # run_brew
+fi
+
+# ----------------------------------------------------
+
+# Check for git
+# Git will be installed with xcode command line tools. If not
+# then install with homebrew
+p_header "Checking for git..."
+if ! type_exists 'git'; then
+    p_header "Updating Homebrew..."
+    brew update > /dev/null
+    p_success "Homebrew updated"
+    p_header "Installing Git..."
+    brew install git
+    if type_exists 'git'; then
+        p_success "Successfully installed git."
+    else
+        p_error "Failed to install git."
+        exit 1
+    fi
+else
+    p_success "Git already installed."
+fi
+
+# ----------------------------------------------------
+
+# Initialize the git repository if it's missing
+# Necessary only if it's a fresh install
+# if ! is_git_repo; then
+
+#     p_header "Initializing git repository..."
+#     git init -q || exit 1
+#     p_success "Initialized git repository"
+#     git remote add origin "${DOTFILES_GIT_REMOTE}" > /dev/null
+#     p_success "Added the remote repository as origin"
+#     git fetch -q --all || exit 1
+#     p_success "Fetched everything from the remote"
+#     git reset -q --hard FETCH_HEAD || exit 1
+#     p_success "Reset HEAD branch to master"
+#     git clean -qfd || exit 1
+#     p_success "Cleaned up untracked files"
+#     git pull -q --rebase --set-upstream origin master || exit 1
+#     p_success "Pulled down all the files from the remote"
+#     git submodule -q update --recursive --init || exit 1
+#     p_success "Initialized and updated all the submodules"
+
+#     p_header "Checking for git repository..."
+#     if is_git_repo; then
+#         p_success "Successfully initialized the git repository"
+#     else
+#         p_error "Failed to initialized the git repository"
+#         exit 1
+#     fi
+# fi
+
+
+# ----------------------------------------------------
+
+# Download Git Auto-Completion
+# p_header "Checking for git-completion..."
+# if [ ! -e "${HOME}/.git-completion.bash" ]; then
+#     curl -fsSL https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o "${HOME}/.git-completion.bash"
+#     if [ -f "${HOME}/.git-completion.bash" ]; then
+#         p_success "Successfully downloaded git completion for bash."
+#     else
+#         p_error "Failed to download git completion for bash."
+#         exitcode=1
+#     fi
+# else
+#     p_success "Git completion already downloaded."
+# fi
+
+# ----------------------------------------------------
+
+
+# Download vim plugin manager
+# p_header "Checking for vim-plug..."
+# if [ ! -e "${HOME}/dotfiles/vim/autoload" ]; then
+#     curl -fsSLo ~/.vim/autoload/plug.vim --create-dirs \
+#         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#     if [ -f "${HOME}/.vim/autoload/plug.vim" ]; then
+#         p_success "Successfully downloaded vim-plug. Use :PlugInstall to install the plugins."
+#     else
+#         p_error "Failed to download vim-plug."
+#         exitcode=1
+#     fi
+# else
+#     p_success "Vim-plug already downloaded. Use :PlugInstall to install the plugins."
+# fi
+
+
+
+# ----------------------------------------------------
+
+
+# ----------------------------------------------------
+# Oh My ZSH
+
+p_header "Install Oh My ZSH"
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# ----------------------------------------------------
+# Zsh Syntax Highlighting
+
+p_header "Install Zsh Syntax Highlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/.oh-my-zsh/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+# ----------------------------------------------------
+# Zsh Syntax Highlighting
+
+p_header "Install Powerlevel 10k"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${HOME}/.oh-my-zsh/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
+p_success "Done"
+
+
+# ----------------------------------------------------
+
+
+
+
+link_dotfile "vim/vimrc"       ".vimrc"       || exitcode=1
+link_dotfile "vim/"            ".vim"         || exitcode=1
+link_dotfile "zsh/zshrc"       ".zshrc"       || exitcode=1
+link_dotfile "p10k/p10k.zsh"   ".p10k.zsh"    || exitcode=1
+link_dotfile "tmux/tmux.conf"  ".tmux.conf"   || exitcode=1
+
+
+
+
+# ----------------------------------------------------
+
+p_header "Setting Custom System Preferences"
+bash "${BASEDIR}/macos/macOS_custom_setup.sh" || exitcode=1
+p_success "Done"
+
+# ----------------------------------------------------
+if [ ${exitcode} -eq 1 ]; then
+    echo "Some parts failed"
+else
+    p_success "------ All Completed ------"
+fi
+exit ${exitcode}
