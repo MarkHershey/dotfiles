@@ -7,25 +7,16 @@
 declare -i exitcode
 exitcode=0
 
+# get base directory
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # # dotfiles directory
 # declare DOTFILES_DIRECTORY="${HOME}/dotfiles"
 # declare DOTFILES_TARBALL_PATH="https://github.com/MarkHershey/dotfiles/tarball/master"
 # declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
-# define colors
-green=$(tput setaf 2)
-blue=$(tput setaf 4)
-normal=$(tput sgr0)
-
-# Header logging
-function p_header {
-    printf "\n${blue}%s${normal}\n--------------------------------\n" "$@"
-}
-
-# Success logging
-function p_success {
-    printf "${green}✓ %s${normal}\n\n" "$@"
-}
+# source utility functions
+source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
 
 
 # ----------------------------------------------------
@@ -77,42 +68,34 @@ p_success "Done"
 
 
 # ----------------------------------------------------
-# get base directory
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# vim
-p_header "Linking .vimrc"
-ln -s "${BASEDIR}/vim/vimrc" ~/.vimrc || { echo "Failed" >&2;exit 1; }
-p_success "Done"
+# Vim plugins
 
 p_header "Linking .vim"
-ln -s "${BASEDIR}/vim/" ~/.vim || { echo "Failed" >&2;exit 1; }
+ln -s "${BASEDIR}/vim/" ~/.vim || exitcode=1
 p_success "Done"
 
-# zsh
-p_header "Linking .zshrc"
-if [ -f ~/.zshrc ]; then
-    # shellcheck disable=SC2088
-    echo "~/.zshrc exists, backing it up before overwriting."
-    mv ~/.zshrc ~/.zshrc.backup
-fi
-ln -s "${BASEDIR}/zsh/zshrc" ~/.zshrc || { echo "Failed" >&2;exit 1; }
-p_success "Done"
 
-# p10k
-p_header "Linking .p10k.zsh"
-ln -s "${BASEDIR}/p10k/p10k.zsh" ~/.p10k.zsh || { echo "Failed" >&2;exit 1; }
-p_success "Done"
 
-# tmux
-p_header "Linking .tmux.conf"
-ln -s "${BASEDIR}/tmux/tmux.conf" ~/.tmux.conf || { echo "Failed" >&2;exit 1; }
-p_success "Done"
+# ----------------------------------------------------
+# Linking dotfiles
+
+link_dotfile "vim/vimrc"       ".vimrc"       || exitcode=1
+link_dotfile "vim/"            ".vim"         || exitcode=1
+link_dotfile "zsh/zshrc"       ".zshrc"       || exitcode=1
+link_dotfile "p10k/p10k.zsh"   ".p10k.zsh"    || exitcode=1
+link_dotfile "tmux/tmux.conf"  ".tmux.conf"   || exitcode=1
 
 # git
 # ln -s ${BASEDIR}/gitconfig ~/.gitconfig
 
-p_success "------ All Completed ------"
 
 # ----------------------------------------------------
+# Exit
+
+if [ ${exitcode} -eq 1 ]; then
+    echo "Some parts failed"
+else
+    p_success "------ All Completed ------"
+fi
+
 exit ${exitcode}

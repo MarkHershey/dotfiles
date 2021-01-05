@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-# Just for testing this script
-# source ./utils
-
-DOTFILES_DIRECTORY="${HOME}/dotfiles"
-source "${DOTFILES_DIRECTORY}/utils" || { echo "Failed to source utils" >&2;exit 1; }
-
 brew_install_all() {
 
     # Check for Homebrew
@@ -37,9 +31,9 @@ brew_install_all() {
                 p_success "${formula} already installed"
             else
                 missing_formulae+=("${formula}")
-                echo "Missing formula: ${formula}"
+                p_warning "Missing formula: ${formula}"
             fi
-        done < "${DOTFILES_DIRECTORY}/homebrew/brew_packages.txt"
+        done < "${BASEDIR}/homebrew/brew_packages.txt"
 
         if [[ "${missing_formulae[*]}" ]]; then
 
@@ -50,7 +44,7 @@ brew_install_all() {
                 if formula_exists "$formula"; then
                     p_success "Successfully installed ${formula}"
                 else
-                    echo "Failed to install ${formula}"
+                    e_error "Failed to install ${formula}"
                 fi
             done
 
@@ -61,7 +55,7 @@ brew_install_all() {
         if brew cleanup; then
             p_success "Done"
         else
-            echo "Error occured at cleanup stage, continuing..."
+            p_error "Error occured at cleanup stage, continuing..."
         fi
 
         # Switch to using brew-installed bash as default shell
@@ -74,7 +68,7 @@ brew_install_all() {
 
     else
         printf "\n"
-        echo "Error: Homebrew not found"
+        p_error "Error: Homebrew not found"
         printf "Aborting...\n"
         exit 1
     fi

@@ -10,10 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # - run: |
-      #     sudo apt-get update && sudo apt-get install -y sudo git
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Ubuntu Setup Script
+        run: |
           pwd
-      - run: |
+          set -eo pipefail
+          export TERM=xterm
           ./install

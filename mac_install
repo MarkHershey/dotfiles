@@ -18,7 +18,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # ----------------------------------------------------
 
 source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
-# source "${BASEDIR}/lib/brew"  || { echo "Failed to source brew" >&2;exit 1; }
+source "${BASEDIR}/homebrew/brew_install_default"  || { echo "Failed to source brew" >&2;exit 1; }
 
 # change to the dotfiles directory
 # For some unknown reason it doesn't exist, exit!
@@ -50,9 +50,9 @@ else
 fi
 
 # ----------------------------------------------------
-
 # Check for Homebrew
 # Install homebrew and all the requested packages
+
 p_header "Checking for homebrew..."
 if ! type_exists 'brew'; then
     p_header "Installing Homebrew..."
@@ -60,23 +60,24 @@ if ! type_exists 'brew'; then
 
     if type_exists 'brew'; then
         p_success "Successfully installed homebrew"
-        # p_header "Installing packages..."
-        # run_brew
+        p_header "Installing brew packages..."
+        brew_install_all
     else
         p_error "Failed to install homebrew."
         exit 1
     fi
 else
     p_success "Homebrew already installed."
-    # p_header "Updating packages..."
-    # run_brew
+    p_header "Updating brew packages..."
+    brew_install_all
 fi
 
-# ----------------------------------------------------
 
+# ----------------------------------------------------
 # Check for git
 # Git will be installed with xcode command line tools. If not
 # then install with homebrew
+
 p_header "Checking for git..."
 if ! type_exists 'git'; then
     p_header "Updating Homebrew..."
@@ -93,6 +94,7 @@ if ! type_exists 'git'; then
 else
     p_success "Git already installed."
 fi
+
 
 # ----------------------------------------------------
 
@@ -163,9 +165,6 @@ fi
 
 
 # ----------------------------------------------------
-
-
-# ----------------------------------------------------
 # Oh My ZSH
 
 p_header "Install Oh My ZSH"
@@ -188,9 +187,7 @@ p_success "Done"
 
 
 # ----------------------------------------------------
-
-
-
+# Linking dotfiles
 
 link_dotfile "vim/vimrc"       ".vimrc"       || exitcode=1
 link_dotfile "vim/"            ".vim"         || exitcode=1
@@ -199,18 +196,21 @@ link_dotfile "p10k/p10k.zsh"   ".p10k.zsh"    || exitcode=1
 link_dotfile "tmux/tmux.conf"  ".tmux.conf"   || exitcode=1
 
 
-
-
 # ----------------------------------------------------
+# macOS System Preferences
 
 p_header "Setting Custom System Preferences"
 bash "${BASEDIR}/macos/macOS_custom_setup.sh" || exitcode=1
 p_success "Done"
 
+
 # ----------------------------------------------------
+# Exit
+
 if [ ${exitcode} -eq 1 ]; then
     echo "Some parts failed"
 else
     p_success "------ All Completed ------"
 fi
+
 exit ${exitcode}
