@@ -10,12 +10,12 @@ brew_install_all() {
 
         p_header "Updating Homebrew..."
         # Use the latest version of Homebrew
-        brew update &> /dev/null
+        brew update
         p_success "Done"
 
         p_header "Updating any existing Homebrew formulae..."
         # Upgrade any already-installed formulae
-        brew upgrade &> /dev/null
+        brew upgrade
         p_success "Done"
 
         p_header "Checking status of desired Homebrew formulae..."
