@@ -24,7 +24,7 @@ brew_install_all() {
 
         while IFS= read -r line; do
             brew_list+=("$line");
-        done < <(brew list)
+        done < <(brew list --formula)
 
         while IFS= read -r formula; do
             if contains_element "${formula}" "${brew_list[@]}"; then

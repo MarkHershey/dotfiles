@@ -16,7 +16,7 @@ jobs:
         run: |
           set -eo pipefail
           export TERM=xterm
-          sudo bash setup_macOS
+          bash setup_macOS
         shell: bash
       - name: Run General Script
         run: |

@@ -46,7 +46,7 @@ esac
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
     export TERM=xterm
-    sudo bash setup_macOS
+    bash setup_macOS
 elif [[ $OS == 'Ubuntu' ]]; then
     echo "Setting up dotfiles for Ubuntu..."
     export TERM=xterm
