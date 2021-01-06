@@ -16,5 +16,5 @@ jobs:
         run: |
           set -eo pipefail
           export TERM=xterm
-          sudo bash mac_install
+          sudo bash setup_macOS
         shell: bash

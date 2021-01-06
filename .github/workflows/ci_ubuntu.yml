@@ -17,4 +17,4 @@ jobs:
           pwd
           set -eo pipefail
           export TERM=xterm
-          ./install
+          ./setup_ubuntu
