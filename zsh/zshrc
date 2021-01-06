@@ -110,9 +110,13 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias python="python3"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Disable setup wizard from auto starting
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+# Source .zprofile if any
+[[ ! -f "${HOME}/.zprofile" ]] || source "${HOME}/.zprofile"
