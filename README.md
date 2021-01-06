@@ -32,8 +32,7 @@ git clone https://github.com/MarkHershey/dotfiles.git ~
 For Ubuntu:
 
 ```bash
-sudo apt update
-sudo apt install zsh
+sudo apt update && sudo apt install -y zsh
 ```
 For other OS, refers to [this](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH).
 
@@ -113,9 +112,7 @@ cp ~/dotfiles/p10k/p10k.zsh ~/.p10k.zsh && source ~/.p10k.zsh
 ##### Install Vim
 
 ```bash
-sudo apt remove -y vim-tiny && \
-sudo apt update && \
-sudo apt install -y vim
+sudo apt remove -y vim-tiny && sudo apt update && sudo apt install -y vim
 ```
 
 Verify install
