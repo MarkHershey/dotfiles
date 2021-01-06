@@ -1,6 +1,6 @@
+wget
+curl
 tree
 tmux
 vim
-wget
-pygments
 python3

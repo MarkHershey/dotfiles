@@ -1,0 +1,9 @@
+wget
+curl
+tree
+tmux
+vim
+python3
+pygments
+ffmpeg
+youtube-dl
