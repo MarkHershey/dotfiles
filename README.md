@@ -13,7 +13,7 @@
 For Ubuntu & macOS:
 
 ```bash
-git clone https://github.com/MarkHershey/dotfiles.git ~ && cd ~/dotfiles && ./install
+git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
 ```
 
 ---
@@ -23,7 +23,7 @@ git clone https://github.com/MarkHershey/dotfiles.git ~ && cd ~/dotfiles && ./in
 ### 0 - Clone this repo to user's home
 
 ```bash
-git clone https://github.com/MarkHershey/dotfiles.git ~
+git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles
 ```
 
 ### 1 - Shell: [ZSH (Z Shell)](http://zsh.sourceforge.net/)

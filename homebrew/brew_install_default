@@ -28,7 +28,7 @@ brew_install_all() {
 
         while IFS= read -r formula; do
             if contains_element "${formula}" "${brew_list[@]}"; then
-                # p_success "${formula} already installed"
+                echo "${formula} already installed"
             else
                 missing_formulae+=("${formula}")
                 p_warning "Package to be installed: ${formula}"
