@@ -97,7 +97,8 @@ fi
 # Oh My ZSH
 
 p_header "Install Oh My ZSH"
-if [[ ! -d "${ZSH}" ]]; then
+TMP_INSTALL_PATH="${HOME}/.oh-my-zsh"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
     p_success "Done"
 else

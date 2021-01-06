@@ -16,13 +16,13 @@ case $(uname) in
         echo "System identified: Linux"
         echo "CPU Architecture: $(uname -m)"
         source /etc/lsb-release
-        case "$DISTRIB_ID" in
+        case "${DISTRIB_ID}" in
             Ubuntu)
                 OS='Ubuntu'
-                echo "This is Ubuntu"
+                echo "Linux Distro: Ubuntu"
             ;;
             *)
-                echo "Not Ubuntu"
+                echo "Linux Distro: ${DISTRIB_ID}"
             ;;
         esac
         ;;
