@@ -9,7 +9,7 @@ brew_install_basic() {
         export HOMEBREW_NO_AUTO_UPDATE=1
 
         p_header "Updating Homebrew..."
-        brew update
+        brew update &> /dev/null
         p_success "Done"
 
         # p_header "Updating any existing Homebrew formulae..."
@@ -36,7 +36,7 @@ brew_install_basic() {
         if [[ "${missing_formulae[*]}" ]]; then
 
             for formula in "${missing_formulae[@]}"; do
-                p_header "Installing ${formula}..."
+                p_header "brew install ${formula}"
                 brew install "$formula" &> /dev/null
                 if formula_exists "$formula"; then
                     p_success "Successfully installed ${formula}"
@@ -48,8 +48,8 @@ brew_install_basic() {
         fi
 
         # Remove outdated versions from the Cellar
-        p_header "Cleaning up..."
-        if brew cleanup; then
+        p_header "brew cleanup..."
+        if brew cleanup &> /dev/null; then
             p_success "Done"
         else
             p_error "Error occured at cleanup stage, continuing..."
@@ -109,7 +109,7 @@ brew_install_full() {
         if [[ "${missing_formulae[*]}" ]]; then
 
             for formula in "${missing_formulae[@]}"; do
-                p_header "Installing ${formula}..."
+                p_header "brew install ${formula}"
                 brew install "$formula" &> /dev/null
                 if formula_exists "$formula"; then
                     p_success "Successfully installed ${formula}"
@@ -121,7 +121,7 @@ brew_install_full() {
         fi
 
         # Remove outdated versions from the Cellar
-        p_header "Cleaning up..."
+        p_header "brew cleanup..."
         if brew cleanup; then
             p_success "Done"
         else

@@ -15,8 +15,8 @@ jobs:
       - name: Run Ubuntu Setup Script
         run: |
           pwd
-          set -eo pipefail
-          export TERM=xterm
+          set -euo pipefail
+          export TERM=xterm-256color
           ./setup_ubuntu
       - name: Run General Script
         run: |

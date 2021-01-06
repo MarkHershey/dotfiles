@@ -45,11 +45,11 @@ esac
 
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
-    export TERM=xterm
+    export TERM=xterm-256color
     bash setup_macOS
 elif [[ $OS == 'Ubuntu' ]]; then
     echo "Setting up dotfiles for Ubuntu..."
-    export TERM=xterm
+    export TERM=xterm-256color
     ./setup_ubuntu
 elif [[ $OS == 'Linux' ]]; then
     echo "Setup script is written and tested for Ubuntu, it may fail..."

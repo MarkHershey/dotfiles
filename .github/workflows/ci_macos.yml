@@ -3,8 +3,6 @@ name: CI-macOS
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '0 8 * * 6'
 
 jobs:
   build:
@@ -14,8 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Run macOS Setup Script
         run: |
-          set -eo pipefail
-          export TERM=xterm
+          set -euo pipefail
+          export TERM=xterm-256color
           bash setup_macOS
         shell: bash
       - name: Run General Script
