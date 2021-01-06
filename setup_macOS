@@ -46,6 +46,9 @@ else
     p_success "xcode command line tools already installed."
 fi
 
+# extend sudo timeout for another 5 mins
+sudo -v
+
 # ----------------------------------------------------
 # Check for Homebrew
 # Install homebrew and all the requested packages
@@ -57,17 +60,18 @@ if ! type_exists 'brew'; then
 
     if type_exists 'brew'; then
         p_success "Successfully installed homebrew"
-        p_header "Installing brew packages..."
-        brew_install_all
+        brew_install_basic
     else
         p_error "Failed to install homebrew."
         exit 1
     fi
 else
     p_success "Homebrew already installed."
-    brew_install_all
+    brew_install_basic
 fi
 
+# extend sudo timeout for another 5 mins
+sudo -v
 
 # ----------------------------------------------------
 # Check for git

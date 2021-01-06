@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-brew_install_all() {
+brew_install_basic() {
 
     # Check for Homebrew
     if type_exists 'brew'; then
@@ -9,12 +9,83 @@ brew_install_all() {
         export HOMEBREW_NO_AUTO_UPDATE=1
 
         p_header "Updating Homebrew..."
-        # Use the latest version of Homebrew
+        brew update
+        p_success "Done"
+
+        # p_header "Updating any existing Homebrew formulae..."
+        # brew upgrade
+        # p_success "Done"
+
+        p_header "Checking status of desired Homebrew formulae..."
+        local -a missing_formulae
+        local -a brew_list
+
+        while IFS= read -r line; do
+            brew_list+=("$line");
+        done < <(brew list --formula)
+
+        while IFS= read -r formula; do
+            if contains_element "${formula}" "${brew_list[@]}"; then
+                echo "${formula} already installed"
+            else
+                missing_formulae+=("${formula}")
+                p_warning "Package to be installed: ${formula}"
+            fi
+        done < "${BASEDIR}/homebrew/brew_packages_basic.txt"
+
+        if [[ "${missing_formulae[*]}" ]]; then
+
+            for formula in "${missing_formulae[@]}"; do
+                p_header "Installing ${formula}..."
+                brew install "$formula" &> /dev/null
+                if formula_exists "$formula"; then
+                    p_success "Successfully installed ${formula}"
+                else
+                    p_error "Failed to install ${formula}"
+                fi
+            done
+
+        fi
+
+        # Remove outdated versions from the Cellar
+        p_header "Cleaning up..."
+        if brew cleanup; then
+            p_success "Done"
+        else
+            p_error "Error occured at cleanup stage, continuing..."
+        fi
+
+        # Switch to using brew-installed bash as default shell
+        if ! grep -F -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
+            p_header "Switching to brew-installed bash as default shell..."
+            echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
+            sudo chsh -s "${BREW_PREFIX}/bin/bash";
+            p_success "Done"
+        fi;
+
+    else
+        printf "\n"
+        p_error "Error: Homebrew not found"
+        printf "Aborting...\n"
+        exit 1
+    fi
+
+    unset BREW_PREFIX formula
+}
+
+brew_install_full() {
+
+    # Check for Homebrew
+    if type_exists 'brew'; then
+
+        BREW_PREFIX=$(brew --prefix)
+        export HOMEBREW_NO_AUTO_UPDATE=1
+
+        p_header "Updating Homebrew..."
         brew update
         p_success "Done"
 
         p_header "Updating any existing Homebrew formulae..."
-        # Upgrade any already-installed formulae
         brew upgrade
         p_success "Done"
 
@@ -33,7 +104,7 @@ brew_install_all() {
                 missing_formulae+=("${formula}")
                 p_warning "Package to be installed: ${formula}"
             fi
-        done < "${BASEDIR}/homebrew/brew_packages_basic.txt"
+        done < "${BASEDIR}/homebrew/brew_packages_full.txt"
 
         if [[ "${missing_formulae[*]}" ]]; then
 
