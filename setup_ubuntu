@@ -101,7 +101,7 @@ link_dotfile "git/gitconfig"   ".gitconfig"   || exitcode=1
 # ----------------------------------------------------
 # Exit
 
-if [ ${exitcode} -eq 1 ]; then
+if [ ! ${exitcode} -eq 0 ]; then
     echo "Some parts failed"
 else
     p_success "------ All Completed ------"
