@@ -18,3 +18,6 @@ jobs:
           set -eo pipefail
           export TERM=xterm
           ./setup_ubuntu
+      - name: Run General Script
+        run: |
+          ./install

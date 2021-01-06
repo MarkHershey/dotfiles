@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+# Ref: https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425
+set -euo pipefail
+
+OS="xxx"
+
+case $(uname) in
+    'Darwin') 
+        OS='macOS'
+        echo "System identified: macOS"
+        echo "CPU Architecture: $(uname -m)"
+        ;;
+    'Linux')
+        OS='Linux'
+        echo "System identified: Linux"
+        echo "CPU Architecture: $(uname -m)"
+        source /etc/lsb-release
+        case "$DISTRIB_ID" in
+            Ubuntu)
+                OS='Ubuntu'
+                echo "This is Ubuntu"
+            ;;
+            *)
+                echo "Not Ubuntu"
+            ;;
+        esac
+        ;;
+    'FreeBSD')
+        echo "System identified: FreeBSD"
+        ;;
+    'WindowsNT')
+        echo "System identified: Windows"
+        ;;
+    'SunOS')
+        echo "System identified: Solaris"
+        ;;
+    'AIX')
+        echo "System identified: IBM AIX"
+        ;;
+    *)
+        echo "System not identified"
+        ;;
+esac
+
+if [[ $OS == 'macOS' ]]; then
+    echo "Setting up dotfiles for macOS..."
+    export TERM=xterm
+    ./setup_macOS
+elif [[ $OS == 'Ubuntu' ]]; then
+    echo "Setting up dotfiles for Ubuntu..."
+    export TERM=xterm
+    ./setup_ubuntu
+elif [[ $OS == 'Linux' ]]; then
+    echo "Setup script is written and tested for Ubuntu, it may fail..."
+elif [[ $OS == 'xxx' ]]; then
+    echo "Aborting: OS not supported"
+    exit 1
+fi
