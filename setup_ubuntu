@@ -81,14 +81,6 @@ else
     p_success "Powerlevel 10k already installed."
 fi
 
-# ----------------------------------------------------
-# Vim plugins
-
-p_header "Linking .vim"
-ln -s "${BASEDIR}/vim/" ~/.vim || exitcode=1
-p_success "Done"
-
-
 
 # ----------------------------------------------------
 # Linking dotfiles
@@ -97,9 +89,13 @@ link_dotfile "zsh/zshrc"       ".zshrc"       || exitcode=1
 link_dotfile "p10k/p10k.zsh"   ".p10k.zsh"    || exitcode=1
 link_dotfile "tmux/tmux.conf"  ".tmux.conf"   || exitcode=1
 link_dotfile "vim/vimrc"       ".vimrc"       || exitcode=1
-link_dotfile "vim/"            ".vim"         || exitcode=1
 link_dotfile "git/gitconfig"   ".gitconfig"   || exitcode=1
 
+
+# ----------------------------------------------------
+# Vim plugins
+
+# TODO
 
 
 # ----------------------------------------------------
