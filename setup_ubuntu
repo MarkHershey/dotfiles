@@ -42,30 +42,43 @@ p_success "Done"
 
 p_header "Change default shell to zsh"
 # { chsh -s "$(which zsh)" && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
-{ sudo chsh $USER -s $(which zsh) && echo "$SHELL"; } || { echo "Failed" >&2;exit 1; }
+{ sudo chsh ${USER} -s $(which zsh) && echo "${SHELL}"; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 # ----------------------------------------------------
 # Oh My ZSH
 
 p_header "Install Oh My ZSH"
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
-p_success "Done"
+if [[ ! -d "${ZSH}" ]]; then
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Oh My ZSH already installed."
+fi
 
 # ----------------------------------------------------
 # Zsh Syntax Highlighting
 
 p_header "Install Zsh Syntax Highlighting"
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${HOME}/.oh-my-zsh/plugins/zsh-syntax-highlighting" || { echo "Failed" >&2;exit 1; }
-p_success "Done"
+TMP_INSTALL_PATH="${HOME}/.oh-my-zsh/plugins/zsh-syntax-highlighting"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Zsh Syntax Highlighting already installed."
+fi
 
 # ----------------------------------------------------
-# Zsh Syntax Highlighting
+# Powerlevel 10k
 
 p_header "Install Powerlevel 10k"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${HOME}/.oh-my-zsh/themes/powerlevel10k" || { echo "Failed" >&2;exit 1; }
-p_success "Done"
-
+TMP_INSTALL_PATH="${HOME}/.oh-my-zsh/themes/powerlevel10k"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Powerlevel 10k already installed."
+fi
 
 # ----------------------------------------------------
 # Vim plugins
