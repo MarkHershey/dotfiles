@@ -69,6 +69,33 @@ else
     p_success "Zsh Syntax Highlighting already installed."
 fi
 
+
+# ----------------------------------------------------
+# Zsh Autosuggestions
+
+p_header "Install Zsh Autosuggestions"
+TMP_INSTALL_PATH="${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Zsh Autosuggestions already installed."
+fi
+
+
+# ----------------------------------------------------
+# Zsh Autosuggestions
+
+p_header "Install Zsh Completions"
+TMP_INSTALL_PATH="${HOME}/.oh-my-zsh/custom/plugins/zsh-completions"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+    git clone https://github.com/zsh-users/zsh-completions "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Zsh Completions already installed."
+fi
+
+
 # ----------------------------------------------------
 # Powerlevel 10k
 
