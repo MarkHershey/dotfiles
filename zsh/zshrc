@@ -84,7 +84,7 @@ plugins=(
   sudo 
   command-not-found 
   zsh-completions 
-  # zsh-autosuggestions 
+  zsh-autosuggestions 
   zsh-syntax-highlighting
   )
 # plugins:
