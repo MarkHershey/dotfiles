@@ -25,11 +25,13 @@ Plugin 'preservim/nerdtree'
 Plugin 'preservim/nerdcommenter'
 
 " https://github.com/ycm-core/YouCompleteMe
-Plugin 'ycm-core/YouCompleteMe'
+" Plugin 'ycm-core/YouCompleteMe'
 
 " https://github.com/python-mode/python-mode
 Plugin 'python-mode/python-mode'
 
+" https://www.tabnine.com/
+Plugin 'zxqfl/tabnine-vim'
 
 " ########## Vundle Plugin Section END ##########
 

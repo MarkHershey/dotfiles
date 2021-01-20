@@ -22,10 +22,10 @@ source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
 # ----------------------------------------------------
 # zsh 
 
-p_header "Install wget zsh vim git tmux etc..."
-{ sudo apt-get remove --assume-yes vim-tiny && \
-sudo apt-get update && \
-sudo apt-get install -y --no-install-recommends \
+p_header "Install wget zsh vim git tmux tree make cmake golang python3 build-essential..."
+{ sudo apt-get remove --assume-yes vim-tiny > /dev/null && \
+sudo apt-get update > /dev/null && \
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends \
 wget \
 zsh \
 vim \
@@ -33,7 +33,10 @@ git \
 tmux \
 tree \
 make \
-build-essential; } || { echo "Failed" >&2;exit 1; }
+cmake \
+golang-go \
+python3-dev \
+build-essential > /dev/null; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 
 
@@ -123,8 +126,19 @@ link_dotfile "git/gitconfig"         ".gitconfig"         || exitcode=1
 # ----------------------------------------------------
 # Vim plugins
 
-# TODO
+p_header "Install Vundle"
+TMP_INSTALL_PATH="${HOME}/.vim/bundle/Vundle.vim"
+if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+    p_success "Done"
+else
+    p_success "Vundle already installed."
+fi
 
+
+p_header "Install Vim plugins via Vundle"
+vim +PluginInstall +qall || { echo "Failed" >&2;exit 1; }
+p_success "Done"
 
 # ----------------------------------------------------
 # Exit
