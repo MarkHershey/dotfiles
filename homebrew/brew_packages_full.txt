@@ -3,6 +3,9 @@ curl
 tree
 tmux
 vim
+make
+cmake
+golang
 python3
 pygments
 ffmpeg
