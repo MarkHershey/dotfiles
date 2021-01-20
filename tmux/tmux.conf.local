@@ -43,7 +43,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_24b_colour=false
+tmux_conf_24b_colour=true
 
 # default theme
 tmux_conf_theme_colour_1="#080808"    # dark gray
@@ -63,6 +63,13 @@ tmux_conf_theme_colour_14="#080808"   # dark gray
 tmux_conf_theme_colour_15="#080808"   # dark gray
 tmux_conf_theme_colour_16="#d70000"   # red
 tmux_conf_theme_colour_17="#e4e4e4"   # white
+
+# my custom
+tmux_conf_theme_colour_18="#ceff1a"   # Electric Lime (yellow-green)
+tmux_conf_theme_colour_19="#c41e3d"   # Cardinal (red)
+tmux_conf_theme_colour_20="#b09e99"   # Silver Pink (pinky grey)
+tmux_conf_theme_colour_21="#313638"   # Onyx (dark grey)
+tmux_conf_theme_colour_22="#009fb7"   # Blue Munsell (sky blue)
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -226,18 +233,41 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
+
+# $(echo $USER) - shows the current username
+# %a --> Day of week (Mon)
+# %A --> Day of week Expanded (Monday)
+
+# %b --> Month (Jan)
+# %d --> Day (31)
+# %Y --> Year (2017)
+
+# %D --> Month/Day/Year (12/31/2017)
+# %v --> Day-Month-Year (31-Dec-2017)
+
+# %r --> Hour:Min:Sec AM/PM (12:30:27 PM)
+# %T --> 24 Hour:Min:Sec (16:30:27)
+# %X --> Hour:Min:Sec (12:30:27)
+# %R --> 24 Hour:Min (16:30)
+# %H --> 24 Hour (16)
+# %l --> Hour (12)
+# %M --> Mins (30)
+# %S --> Seconds (09)
+# %p --> AM/PM (AM)
+
+# For a more complete list view: https://linux.die.net/man/3/strftime
+tmux_conf_theme_status_left=" ❐ #S | Up#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized} %R , %d %b %Y (%a) | #{username}#{root} | #{hostname} "
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
-tmux_conf_theme_status_left_attr="bold,none,none"
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_14,$tmux_conf_theme_colour_8"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_18,$tmux_conf_theme_colour_17,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_attr="none,none,bold"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
-tmux_conf_theme_status_right_attr="none,none,bold"
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_14,$tmux_conf_theme_colour_14"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_18,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_attr="none,bold,none"
 
 # pairing indicator
 tmux_conf_theme_pairing="⚇"                 # U+2687

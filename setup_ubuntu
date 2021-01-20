@@ -112,11 +112,12 @@ fi
 # ----------------------------------------------------
 # Linking dotfiles
 
-link_dotfile "zsh/zshrc"       ".zshrc"       || exitcode=1
-link_dotfile "p10k/p10k.zsh"   ".p10k.zsh"    || exitcode=1
-link_dotfile "tmux/tmux.conf"  ".tmux.conf"   || exitcode=1
-link_dotfile "vim/vimrc"       ".vimrc"       || exitcode=1
-link_dotfile "git/gitconfig"   ".gitconfig"   || exitcode=1
+link_dotfile "zsh/zshrc"             ".zshrc"             || exitcode=1
+link_dotfile "p10k/p10k.zsh"         ".p10k.zsh"          || exitcode=1
+link_dotfile "tmux/tmux.conf"        ".tmux.conf"         || exitcode=1
+link_dotfile "tmux/tmux.conf.local"  ".tmux.conf.local"   || exitcode=1
+link_dotfile "vim/vimrc"             ".vimrc"             || exitcode=1
+link_dotfile "git/gitconfig"         ".gitconfig"         || exitcode=1
 
 
 # ----------------------------------------------------
