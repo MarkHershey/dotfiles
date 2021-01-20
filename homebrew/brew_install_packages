@@ -31,7 +31,7 @@ brew_install_basic() {
                 missing_formulae+=("${formula}")
                 p_warning "Package to be installed: ${formula}"
             fi
-        done < "${BASEDIR}/homebrew/brew_packages_basic.txt"
+        done < "${BASEDIR}/homebrew/packages_basic.txt"
 
         if [[ "${missing_formulae[*]}" ]]; then
 
@@ -104,7 +104,7 @@ brew_install_full() {
                 missing_formulae+=("${formula}")
                 p_warning "Package to be installed: ${formula}"
             fi
-        done < "${BASEDIR}/homebrew/brew_packages_full.txt"
+        done < "${BASEDIR}/homebrew/packages_full.txt"
 
         if [[ "${missing_formulae[*]}" ]]; then
 

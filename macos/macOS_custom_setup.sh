@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# ref: https://github.com/donnemartin/dev-setup/blob/master/osx.sh
+# reference: https://github.com/donnemartin/dev-setup/blob/master/osx.sh
+#        and https://github.com/mathiasbynens/dotfiles/blob/main/.macos
 
+# Following settings are personal preferences by Mark Huang
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change

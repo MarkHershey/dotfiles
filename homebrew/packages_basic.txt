@@ -1,6 +1,5 @@
 wget
 curl
-tree
 tmux
 vim
 python3
