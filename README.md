@@ -17,7 +17,7 @@ For Ubuntu & macOS:
 git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
 ```
 
-## Bootstrap Install with `curl`
+## Bootstrap Install w/ curl
 
 ```bash
 # TODO
