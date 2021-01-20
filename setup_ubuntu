@@ -16,7 +16,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # declare DOTFILES_GIT_REMOTE="https://github.com/MarkHershey/dotfiles.git"
 
 # source utility functions
-source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
+source "${BASEDIR}/shell_utils" || { echo "Failed to source shell_utils" >&2;exit 1; }
 
 
 # ----------------------------------------------------

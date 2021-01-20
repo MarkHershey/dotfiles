@@ -1,4 +1,4 @@
-# dotfiles
+# Dotfiles
 
 *personal dotfiles & quick machine setup scripts*
 
@@ -8,12 +8,19 @@
 
 ---
 
-## Automatic Setup
+## Bootstrap Install w/ Git
 
 For Ubuntu & macOS:
 
+- Just make sure you already have `git` installed.
 ```bash
 git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
+```
+
+## Bootstrap Install with `curl`
+
+```bash
+# TODO
 ```
 
 ---

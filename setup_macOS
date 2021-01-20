@@ -14,7 +14,7 @@ sudo -v
 
 # ----------------------------------------------------
 
-source "${BASEDIR}/utils" || { echo "Failed to source utils" >&2;exit 1; }
+source "${BASEDIR}/shell_utils" || { echo "Failed to source shell_utils" >&2;exit 1; }
 source "${BASEDIR}/homebrew/brew_install_packages"  || { echo "Failed to source brew_install_packages" >&2;exit 1; }
 
 # change to the dotfiles directory
