@@ -195,11 +195,11 @@ p_success "Done"
 
 p_header "Copy personal scripts to user home bin"
 if [[ ! -d "${HOME}/bin" ]]; then
-    mkdir "${HOME}/bin" || { echo "Failed" >&2;exit 1; }
+    mkdir -v "${HOME}/bin" || { echo "Failed" >&2;exit 1; }
 fi
 # -n for do not overwriting
 # -v for verbose
-cp -vn bin/* "${HOME}/bin" || exitcode=1
+cp -vn bin/* "${HOME}/bin"
 p_success "Done"
 
 

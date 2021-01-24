@@ -35,11 +35,13 @@ function p_warning {
 function link_dotfile {
     p_header "Creating symlink to ${2} in ${HOME} directory..."
 
-    if [ -f "${HOME}/${2}" ]; then
-    # shellcheck disable=SC2088
-    p_warning "${HOME}/${2} exists, backing it up to ${HOME}/${2}.backup"
-    # force overwriting backup file
-    mv -f "${HOME}/${2}" "${HOME}/${2}.backup"
+    if [ -f "${HOME}/${2}" && -L "${HOME}/${2}" ]; then
+        rm -v "${HOME}/${2}"
+    elif [ -f "${HOME}/${2}" && ! -L "${HOME}/${2}" ]; then
+        # shellcheck disable=SC2088
+        p_warning "${HOME}/${2} exists, backing it up to ${HOME}/${2}.backup"
+        # force overwriting backup file
+        mv -f "${HOME}/${2}" "${HOME}/${2}.backup"
     fi
 
     # Create the symlink.
