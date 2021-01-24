@@ -17,7 +17,7 @@ For Ubuntu & macOS:
 git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
 ```
 
-## Bootstrap Install w/ curl
+## Bootstrap Install w/ Curl
 
 ```bash
 # TODO
@@ -80,7 +80,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+"${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 ```
 
 
@@ -90,7 +90,7 @@ ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+"${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k"
 ```
 
 ##### Install Font `MesloLGS NF`

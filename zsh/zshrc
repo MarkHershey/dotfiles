@@ -129,3 +129,6 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # Source .zprofile if any
 [[ ! -f "${HOME}/.zprofile" ]] || source "${HOME}/.zprofile"
+
+# Source User Bin if any
+[[ ! -d "${HOME}/bin" ]] || export PATH="${PATH}:${HOME}/bin"
