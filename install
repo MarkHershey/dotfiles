@@ -43,6 +43,20 @@ case $(uname) in
         ;;
 esac
 
+# TODO: general install option on shared public machine
+# GENERAL_INSTALL=0
+
+# Parse options
+# while [ $# -gt 0 ]; do
+# 	case "$1" in
+# 	-g) GENERAL_INSTALL=1 ;;
+# 	--general) GENERAL_INSTALL=1 ;;
+# 	*) echo "Option $1 not recognized" ;;
+# 	esac
+# 	shift
+# done
+
+
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
     export TERM=xterm-256color

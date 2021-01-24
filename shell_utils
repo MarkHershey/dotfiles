@@ -45,7 +45,10 @@ function link_dotfile {
     fi
 
     # Create the symlink.
-    if ln --symbolic --force --verbose "${BASEDIR}/${1}" "${HOME}/${2}"; then
+    # -s for symbolic
+    # -v for verbose
+    # -f for force
+    if ln -svf "${BASEDIR}/${1}" "${HOME}/${2}"; then
         p_success "Done"
         return 0
     else
