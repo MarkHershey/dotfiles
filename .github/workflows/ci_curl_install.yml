@@ -1,0 +1,15 @@
+name: CI-ubuntu
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Bootstrap Install w/ Curl
+        run: |
+          pwd
+          apt update && apt install -y curl
+          sh -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
