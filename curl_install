@@ -3,7 +3,7 @@
 # dotfiles directory
 DOTFILES_DIRECTORY="${HOME}/dotfiles"
 
-function download_dotfiles() {
+download_dotfiles() {
   if [[ ! -d "${DOTFILES_DIRECTORY}" ]]; then
     echo "Downloading dotfiles..."
     # -p Create intermediate directories as required.
