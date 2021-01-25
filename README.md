@@ -12,7 +12,6 @@
 
 For Ubuntu & macOS:
 
-- Just make sure you already have `git` installed.
 ```bash
 git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
 ```
@@ -20,7 +19,7 @@ git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfile
 ## Bootstrap Install w/ Curl
 
 ```bash
-# TODO
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
 
 ---
