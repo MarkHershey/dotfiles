@@ -8,8 +8,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run Bootstrap Install w/ Curl
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run curl_install
         run: |
           pwd
-          apt update && apt install -y curl
-          sh -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+          set -euo pipefail
+          sh ./curl_install
