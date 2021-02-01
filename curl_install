@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # dotfiles directory
-DOTFILES_DIRECTORY="${HOME}/dotfiles"
+DOTFILES_DIRECTORY="dotfiles"
 
 download_dotfiles() {
   if [[ ! -d "${DOTFILES_DIRECTORY}" ]]; then
@@ -9,25 +9,27 @@ download_dotfiles() {
     # -p Create intermediate directories as required.
     mkdir -p "${DOTFILES_DIRECTORY}"
     # Get the tarball
-    if curl -fsSLo ~/dotfiles.tar.gz https://github.com/MarkHershey/dotfiles/tarball/master; then
-      echo "Done."
+    if curl -fsSLo dotfiles.tar.gz https://github.com/MarkHershey/dotfiles/tarball/master; then
+      printf "Done.\n\n"
     else
       echo "Failed to download the dotfiles."
       exit 1
     fi
     # Extract to the dotfiles directory
     echo "Extracting the dotfiles..."
-    tar -zxf "${HOME}/dotfiles.tar.gz" --strip-components 1 -C "${DOTFILES_DIRECTORY}"
+    tar -zxf "dotfiles.tar.gz" --strip-components 1 -C "${DOTFILES_DIRECTORY}"
     if [[ -d "${DOTFILES_DIRECTORY}" ]]; then
-      echo "Done."
+      printf "Done.\n\n"
     else
       echo "Failed to extract the dotfiles."
       exit 1
     fi
     # Remove the tarball
     echo "Removing dotfiles.tar.gz..."
-    rm ~/dotfiles.tar.gz
-    echo "Done."
+    rm dotfiles.tar.gz
+    printf "Done.\n\n"
+  else
+    echo "Directory 'dotfiles' already exists in current directory."
   fi
 }
 
@@ -36,7 +38,9 @@ download_dotfiles
 
 echo "Changing directory to ${DOTFILES_DIRECTORY}"
 cd "${DOTFILES_DIRECTORY}" || { echo "Failed to change directory." >&2;exit 1; }
-echo "Done."
+printf "Done.\n\n"
 
 # start install script
+printf "Current working directory: "
+pwd
 ./install
