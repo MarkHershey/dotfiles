@@ -4,6 +4,7 @@
 
 ![](https://github.com/MarkHershey/dotfiles/workflows/Shellcheck/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu/badge.svg?branch=master)
+![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu-curl/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-macOS/badge.svg?branch=master)
 
 ---
