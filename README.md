@@ -22,7 +22,7 @@ git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfile
 ### Bootstrap Install w/ Curl
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
 
 ## What is included?
