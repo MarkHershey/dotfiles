@@ -4,6 +4,7 @@
 
 ![](https://github.com/MarkHershey/dotfiles/workflows/Shellcheck/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu/badge.svg?branch=master)
+![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu-curl/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-macOS/badge.svg?branch=master)
 
 ---
@@ -21,7 +22,7 @@ git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfile
 ### Bootstrap Install w/ Curl
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
 
 ## What is included?

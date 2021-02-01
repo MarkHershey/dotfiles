@@ -1,4 +1,4 @@
-name: CI-ubuntu
+name: CI-ubuntu-curl
 
 on:
   push:
@@ -7,8 +7,6 @@ on:
   pull_request:
     branches:
       - master
-  schedule:
-    - cron: '0 8 * * 6' # Run on every Saturday 8.00 AM
 
 jobs:
   build:
@@ -16,12 +14,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Ubuntu Setup Script
+      - name: Run Curl Install Script
         run: |
           pwd
           set -euo pipefail
           export TERM=xterm-256color
-          ./setup_ubuntu
-      - name: Run General Script
-        run: |
-          ./install
+          mkdir TEST && cd TEST
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
