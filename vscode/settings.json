@@ -1,0 +1,18 @@
+{
+    "json.maxItemsComputed": 15000,
+    "workbench.editorAssociations": [],
+    "editor.multiCursorModifier": "ctrlCmd",
+    "workbench.iconTheme": "file-icons-colourless",
+    "workbench.colorTheme": "Monokai Pro (Filter Octagon)",
+    "tabnine.experimentalAutoImports": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "prettier.tabWidth": 4,
+    "python.languageServer": "Pylance",
+    "git.autofetch": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "latex-workshop.view.pdf.viewer": "tab",
+    "editor.fontFamily": "MesloLGS NF, Menlo, Monaco, 'Courier New', monospace",
+    "jupyter.alwaysTrustNotebooks": true,
+    "editor.formatOnSave": true
+}
