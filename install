@@ -60,13 +60,14 @@ esac
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
     export TERM=xterm-256color
-    bash setup_macOS
+    ./setup_macOS
 elif [[ $OS == 'Ubuntu' ]]; then
     echo "Setting up dotfiles for Ubuntu..."
     export TERM=xterm-256color
     ./setup_ubuntu
 elif [[ $OS == 'Linux' ]]; then
-    echo "Setup script is written and tested for Ubuntu, it may fail..."
+    echo "Warning: Setup script is tested for Ubuntu only, it may fail on non-ubuntu Linux distro."
+    echo "Look through 'setup_ubuntu' and run it at your own risk. Aborted."
 elif [[ $OS == 'xxx' ]]; then
     echo "Aborting: OS not supported"
     exit 1
