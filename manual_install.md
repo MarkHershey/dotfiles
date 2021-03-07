@@ -1,7 +1,5 @@
 # Dotfiles
 
-*personal dotfiles & quick machine setup scripts*
-
 ## Manual Setup
 
 ### 0 - Clone this repo to user's home
@@ -13,24 +11,29 @@ git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles
 ### 1 - Shell: [ZSH (Z Shell)](http://zsh.sourceforge.net/)
 
 ##### Install ZSH
+
 For Ubuntu:
 
 ```bash
 sudo apt update && sudo apt install -y zsh
 ```
+
 For other OS, refers to [this](https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH).
 
 Verify install
+
 ```bash
 zsh --version
 ```
 
 ##### Change default shell for current user
+
 ```bash
 chsh -s $(which zsh)
 ```
 
 Verify default shell
+
 ```bash
 echo $SHELL
 ```
@@ -40,6 +43,7 @@ should return `/usr/bin/zsh` or `/bin/zsh` or similar.
 ### 2 - Plugin Manager for ZSH: [Oh My ZSH](https://github.com/ohmyzsh/ohmyzsh)
 
 ##### Install Oh My ZSH
+
 ```bash
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
@@ -50,7 +54,6 @@ or
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-
 ### 3 - ZSH Plugin: [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
 ##### Install zsh-syntax-highlighting into Oh My ZSH plugins folder
@@ -59,7 +62,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
 "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 ```
-
 
 ### 4 - ZSH Theme: [Powerlevel 10k](https://github.com/romkatv/powerlevel10k)
 
@@ -72,8 +74,8 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 
 ##### Install Font `MesloLGS NF`
 
-- [Manual font installation](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
-- Select `MesloLGS NF` as font in terminal's preference setting.
+-   [Manual font installation](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+-   Select `MesloLGS NF` as font in terminal's preference setting.
 
 ##### Copy `ZSH` dotfile
 
@@ -102,6 +104,7 @@ sudo apt remove -y vim-tiny && sudo apt update && sudo apt install -y vim
 ```
 
 Verify install
+
 ```bash
 vim --version
 ```

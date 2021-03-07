@@ -28,10 +28,10 @@ Plugin 'preservim/nerdcommenter'
 " Plugin 'ycm-core/YouCompleteMe'
 
 " https://github.com/python-mode/python-mode
-Plugin 'python-mode/python-mode'
+" Plugin 'python-mode/python-mode'
 
 " https://www.tabnine.com/
-Plugin 'zxqfl/tabnine-vim'
+" Plugin 'zxqfl/tabnine-vim'
 
 " ########## Vundle Plugin Section END ##########
 
