@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo nvidia-smi -pm 1
+sudo nvidia-smi -lgc 200,1650

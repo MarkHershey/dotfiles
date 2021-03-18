@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo nvidia-smi -rgc
