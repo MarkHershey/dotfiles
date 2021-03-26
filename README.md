@@ -11,19 +11,19 @@ _personal dotfiles & quick machine setup scripts_
 
 ## Install
 
-### Bootstrap Install w/ Git
+For Ubuntu & macOS only:
 
-For Ubuntu & macOS:
+-   Bootstrap Install w/ Git
 
-```bash
-git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
-```
+    ```bash
+    git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
+    ```
 
-Bootstrap Install w/ Curl
+-   Bootstrap Install w/ Curl
 
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
-```
+    ```bash
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+    ```
 
 ## Configurations
 
