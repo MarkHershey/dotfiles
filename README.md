@@ -25,6 +25,30 @@ git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfile
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
 
+## Try it in Docker
+
+-   Build image from source
+
+    ```bash
+    docker build -t ubuntu-dev .
+    ```
+
+-   Run local image
+
+    ```bash
+    docker run -it ubuntu-dev
+    ```
+
+-   Alternatively, run the pre-built image
+
+    ```bash
+    docker run -it --rm markhersheydev/ubuntu-dev
+    ```
+
+## After Installation
+
+-   [`git/gitconfig`](git/gitconfig) contains git user information, you may want to modify it immediately after installation.
+
 ## What is included?
 
 -   `zsh`
