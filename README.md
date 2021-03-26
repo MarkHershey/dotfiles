@@ -19,11 +19,16 @@ For Ubuntu & macOS:
 git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
 ```
 
-### Bootstrap Install w/ Curl
+Bootstrap Install w/ Curl
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
+
+## Configurations
+
+-   [`git/gitconfig`](git/gitconfig) contains git user information.
+-   [`macos/macOS_custom_setup.sh`](macos/macOS_custom_setup.sh) Line 105-115 contains language & timezone settings for macOS.
 
 ## Try it in Docker
 
@@ -44,10 +49,6 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/mas
     ```bash
     docker run -it --rm markhersheydev/ubuntu-dev
     ```
-
-## After Installation
-
--   [`git/gitconfig`](git/gitconfig) contains git user information, you may want to modify it immediately after installation.
 
 ## What is included?
 
