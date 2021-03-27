@@ -11,18 +11,20 @@ _personal dotfiles & quick machine setup scripts_
 
 ## Install
 
-For Ubuntu & macOS only:
+To run automated dotfile-install script for Ubuntu & macOS, choose either:
 
 -   Bootstrap Install w/ Git
 
     ```bash
-    git clone https://github.com/MarkHershey/dotfiles.git ~/dotfiles && cd ~/dotfiles && ./install
+    $ git clone https://github.com/MarkHershey/dotfiles.git
+    $ cd dotfiles
+    $ ./install
     ```
 
 -   Bootstrap Install w/ Curl
 
     ```bash
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+    $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
     ```
 
 ## Configurations
@@ -35,19 +37,21 @@ For Ubuntu & macOS only:
 -   Build image from source
 
     ```bash
-    docker build -t ubuntu-dev .
+    $ git clone https://github.com/MarkHershey/dotfiles.git
+    $ cd dotfiles
+    $ docker build -t ubuntu-dev .
     ```
 
 -   Run local image
 
     ```bash
-    docker run -it ubuntu-dev
+    $ docker run -it ubuntu-dev
     ```
 
 -   Alternatively, run the pre-built image
 
     ```bash
-    docker run -it --rm markhersheydev/ubuntu-dev
+    $ docker run -it --rm markhersheydev/ubuntu-dev
     ```
 
 ## What is included?
