@@ -15,17 +15,17 @@ To run automated dotfile-install script for Ubuntu & macOS, choose either:
 
 -   Bootstrap Install w/ Git
 
-    ```bash
-    $ git clone https://github.com/MarkHershey/dotfiles.git
-    $ cd dotfiles
-    $ ./install
-    ```
+```bash
+git clone https://github.com/MarkHershey/dotfiles.git && \
+cd dotfiles && \
+./install
+```
 
 -   Bootstrap Install w/ Curl
 
-    ```bash
-    $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
-    ```
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
+```
 
 ## Configurations
 
@@ -37,26 +37,26 @@ To run automated dotfile-install script for Ubuntu & macOS, choose either:
 -   Build image from source
 
     ```bash
-    $ git clone https://github.com/MarkHershey/dotfiles.git
-    $ cd dotfiles
-    $ docker build -t ubuntu-dev .
+    git clone https://github.com/MarkHershey/dotfiles.git && \
+    cd dotfiles && \
+    docker build -t ubuntu-dev .
     ```
 
--   Run local image
+    Then, run the local image
 
     ```bash
-    $ docker run -it ubuntu-dev
+    docker run -it ubuntu-dev
     ```
 
--   Alternatively, run the pre-built image
+-   Alternatively, directly run the pre-built image
 
     ```bash
-    $ docker run -it --rm markhersheydev/ubuntu-dev
+    docker run -it --rm markhersheydev/ubuntu-dev
     ```
 
 ## What is included?
 
--   `zsh`
+-   [`zsh`](https://en.wikipedia.org/wiki/Z_shell)
     -   Plugin Manager
         -   [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
     -   Built-in Plugins
