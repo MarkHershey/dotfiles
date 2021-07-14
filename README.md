@@ -7,13 +7,17 @@ _personal dotfiles & quick machine setup scripts_
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu-curl/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-macOS/badge.svg?branch=master)
 
+It's a good idea to use a version control system (VCS) like `git` to manage your dotfiles in one place and a script to bootstrap all your dotfiles, so that every time you set up a new machine or a remote server, you just need to clone the repository and run the `./install` script.
+
+Hope this repository gives you inspiration.
+
 ---
 
 ## Install
 
-To run automated dotfile-install script for Ubuntu & macOS, choose either:
+To run the automated dotfiles-install script for Ubuntu or macOS, choose either:
 
--   Bootstrap Install w/ Git
+-   Install with Git
 
 ```bash
 git clone https://github.com/MarkHershey/dotfiles.git && \
@@ -21,7 +25,7 @@ cd dotfiles && \
 ./install
 ```
 
--   Bootstrap Install w/ Curl
+-   Install without Git
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
@@ -30,7 +34,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/mas
 ## Configurations
 
 -   [`git/gitconfig`](git/gitconfig) contains git user information.
--   [`macos/macOS_custom_setup.sh`](macos/macOS_custom_setup.sh) Line 105-115 contains language & timezone settings for macOS.
+-   [`macos/macOS_custom_setup.sh`](https://github.com/MarkHershey/dotfiles/blob/eb7cb134a58ee618c10bbc91f16596be1cca36e1/macos/macOS_custom_setup.sh#L105) Line 105-115 contains language & timezone settings for macOS.
 
 ## Try it in Docker
 
