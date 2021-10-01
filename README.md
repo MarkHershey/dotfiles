@@ -9,11 +9,13 @@ _personal dotfiles & quick machine setup scripts_
 
 It's a good idea to use a version control system (VCS) like `git` to manage your dotfiles in one place and a script to bootstrap all your dotfiles, so that every time you set up a new machine or a remote server, you just need to clone the repository and run the `./install` script.
 
+The install script is **idempotent**, meaning that you could run the script repeatedly without causing any unwanted effect.
+
 Hope this repository gives you inspiration.
 
 ---
 
-## Install
+## Run the Script
 
 To run the automated dotfiles-install script for Ubuntu or macOS, choose either:
 
@@ -31,12 +33,29 @@ cd dotfiles && \
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/master/curl_install)"
 ```
 
-## Configurations
+## Before You Run the Script
+
+### Fork the Repository
+
+Fork this repo, alternatively, clone this repo and make it your own repo.
+
+```bash
+git clone https://github.com/MarkHershey/dotfiles.git
+cd dotfiles
+rm -rf .git
+git init
+```
+
+### Configurations
+
+Look through the scripts, you should always understand the script before you run it. In addition, you should definitely modify the files that contain personal/regional information to suit your needs.
 
 -   [`git/gitconfig`](git/gitconfig) contains git user information.
 -   [`macos/macOS_custom_setup.sh`](https://github.com/MarkHershey/dotfiles/blob/eb7cb134a58ee618c10bbc91f16596be1cca36e1/macos/macOS_custom_setup.sh#L105) Line 105-115 contains language & timezone settings for macOS.
 
-## Try it in Docker
+### Try it in Docker
+
+Optionally, if you are not sure if the script will deliver what you wanted, you can try the setup in a Docker container.
 
 -   Build image from source
 
@@ -87,4 +106,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/MarkHershey/dotfiles/mas
 
 ## LICENSE
 
-Copyright (c) 2020-2021 Mark Huang - [MIT LICENSE](LICENSE)
+Copyright (c) 2020-2022 Mark Huang - [MIT LICENSE](LICENSE)
