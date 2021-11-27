@@ -3,24 +3,24 @@
 # check dir 'venv' does not exist
 printf ">>> Checking current directory... \n"
 if [ -d "venv" ]; then
-    printf ">>> Error: dir 'venv' already exists. \n"
-    printf ">>> Aborting... \n"
-    exit 1
+    create_venv=0
+    printf ">>> dir 'venv' already exists. \n"
 else
+    create_venv=1
     printf ">>> \xE2\x9C\x94 OK \n"
-
 fi
 
 # check python version
 printf "\n>>> Checking Python version... \n"
 version=$(python -V)
 if [[ "$version" == "Python 3."* ]]; then
-    printf ">>> \xE2\x9C\x94 $version \n"
-    use_python=true
+    printf ">>> \xE2\x9C\x94 OK %s() \n" "$version"
+    use_python=1
 else
+    use_python=0
     version=$(python3 -V)
     if [[ "$version" == "Python 3."* ]]; then
-        printf ">>> \xE2\x9C\x94 $version \n"
+        printf ">>> \xE2\x9C\x94 OK %s() \n" "$version"
     else
         printf ">>> Error: Python 3.x not found."
         printf ">>> Aborting... \n"
@@ -29,14 +29,17 @@ else
 fi
 
 # use python 3 create virtual environment
-if [ "$use_python" == true ]; then
-    printf "\n>>> python -m venv venv \n"
-    python -m venv venv || exit 1
-else
-    printf "\n>>> python3 -m venv venv \n"
-    python3 -m venv venv || exit 1
+if [ "$create_venv" -eq 1 ]; then
+    if [ "$use_python" -eq 1 ]; then
+        printf "\n>>> python -m venv venv \n"
+        python -m venv venv || exit 1
+    else
+        printf "\n>>> python3 -m venv venv \n"
+        python3 -m venv venv || exit 1
+    fi
+    printf ">>> \xE2\x9C\x94 OK \n"
 fi
-printf ">>> \xE2\x9C\x94 OK \n"
+
 
 # activate the virtual environment
 source venv/bin/activate
