@@ -124,6 +124,7 @@ export LC_TIME="en_GB.UTF-8"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias python="python3"
 alias ib="isort . && black ."
+# alias open="xdg-open" # if using Linux
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
