@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+import json
+import subprocess
+from pathlib import Path
+
+vscode_dir = Path(".vscode")
+setting_path = vscode_dir / "settings.json"
+
+
+def get_black_path() -> str:
+    completed_process = subprocess.run(
+        "which black",
+        shell=True,
+        check=True,
+        stdout=subprocess.PIPE,
+    )
+    return completed_process.stdout.decode("utf-8").strip()
+
+
+def set_black_path(path: str) -> None:
+    """Set black path for vscode project settings"""
+    if not vscode_dir.is_dir():
+        vscode_dir.mkdir()
+
+    settings = {}
+    if setting_path.is_file():
+        with setting_path.open() as f:
+            settings = json.load(f)
+            f.close()
+
+    settings["python.formatting.blackPath"] = path
+    with setting_path.open("w") as f:
+        json.dump(settings, f, indent=4)
+        f.close()
+
+    return
+
+
+if __name__ == "__main__":
+    set_black_path(get_black_path())
