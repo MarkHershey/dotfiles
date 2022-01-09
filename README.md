@@ -108,6 +108,12 @@ Optionally, if you are not sure if the script will deliver what you wanted, you 
 
 -   [ ] Automate Custom Keybindings for Ubuntu. [Reference](https://askubuntu.com/a/597414)
 
+## References
+
+-   [donnemartin / dev-setup / osx.sh](https://github.com/donnemartin/dev-setup/blob/master/osx.sh)
+-   [mathiasbynens / dotfiles / .macos](https://github.com/mathiasbynens/dotfiles/blob/main/.macos)
+-   [teddysun / across / bench.sh](https://github.com/teddysun/across/blob/master/bench.sh)
+
 ## LICENSE
 
 Copyright (c) 2020-2022 Mark Huang - [MIT LICENSE](LICENSE)

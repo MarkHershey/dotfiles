@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+authors:
+    - family-names: "Huang"
+      given-names: "He"
+      orcid: "https://orcid.org/0000-0002-9217-4977"
+      affiliation: "Singapore University of Technology and Design"
+title: "Dotfiles Management and Unix Machine Setup Scripts"
+version: 1.0.0
+date-released: 2020-07-04
+url: "https://github.com/MarkHershey/dotfiles"
