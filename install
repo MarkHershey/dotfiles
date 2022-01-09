@@ -2,46 +2,55 @@
 
 # Ref: https://gist.github.com/mohanpedala/1e2ff5661761d3abd0385e8223e16425
 set -euo pipefail
+IFS=$'\n\t'
+
+
+get_opsy() {
+    [ -f /etc/redhat-release ] && awk '{print $0}' /etc/redhat-release && return
+    [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
+    [ -f /etc/lsb-release ] && awk -F'[="]+' '/DESCRIPTION/{print $2}' /etc/lsb-release && return
+}
+
+next() {
+    printf "%-70s\n" "-" | sed 's/\s/-/g'
+}
 
 OS="xxx"
-
 case $(uname) in
     'Darwin') 
         OS='macOS'
-        echo "System identified: macOS"
-        echo "CPU Architecture: $(uname -m)"
         ;;
     'Linux')
         OS='Linux'
-        echo "System identified: Linux"
-        echo "CPU Architecture: $(uname -m)"
+        opsy=$( get_opsy )
+        cpu_name=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
+        cores=$( awk -F: '/processor/ {core++} END {print core}' /proc/cpuinfo )
+        freq=$( awk -F'[ :]' '/cpu MHz/ {print $4;exit}' /proc/cpuinfo )
         source /etc/lsb-release
-        case "${DISTRIB_ID}" in
-            Ubuntu)
-                OS='Ubuntu'
-                echo "Linux Distro: Ubuntu"
-            ;;
-            *)
-                echo "Linux Distro: ${DISTRIB_ID}"
-            ;;
-        esac
+        if [[ $DISTRIB_ID == 'Ubuntu' ]]; then
+            OS='Ubuntu'
+        fi
         ;;
     'FreeBSD')
-        echo "System identified: FreeBSD"
+        OS='FreeBSD'
         ;;
     'WindowsNT')
-        echo "System identified: Windows"
+        OS='Windows'
         ;;
     'SunOS')
-        echo "System identified: Solaris"
+        OS='Solaris'
         ;;
     'AIX')
-        echo "System identified: IBM AIX"
+        OS='IBM AIX'
         ;;
     *)
-        echo "System not identified"
+        echo "Aborting: System not identified"
+        exit 1
         ;;
 esac
+
+echo "System identified: ${OS}"
+next
 
 # TODO: general install option on shared public machine
 # GENERAL_INSTALL=0
@@ -56,19 +65,24 @@ esac
 # 	shift
 # done
 
+export TERM=xterm-256color
 
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
-    export TERM=xterm-256color
-    ./setup_macOS
+    # ./setup_macOS
 elif [[ $OS == 'Ubuntu' ]]; then
+    echo "Linux Distro      : ${opsy}"
+    echo "CPU Model         : ${cpu_name}"
+    echo "CPU Cores         : ${cores}"
+    echo "CPU Frequency     : ${freq}"
+    echo "CPU Architecture  : $(uname -m)"
+    next
     echo "Setting up dotfiles for Ubuntu..."
-    export TERM=xterm-256color
-    ./setup_ubuntu
+    # ./setup_ubuntu
 elif [[ $OS == 'Linux' ]]; then
-    echo "Warning: Setup script is tested for Ubuntu only, it may fail on non-ubuntu Linux distro."
-    echo "Look through 'setup_ubuntu' and run it at your own risk. Aborted."
-elif [[ $OS == 'xxx' ]]; then
+    echo "Aborting: Setup script is tested for Ubuntu only, it may fail on non-ubuntu Linux distro."
+    exit 1
+else
     echo "Aborting: OS not supported"
     exit 1
 fi

@@ -1,17 +1,28 @@
 ## Ubuntu Setup
 
-```bash
-sudo apt update && \
-sudo apt install \
-libncurses5-dev \
-libncursesw5-dev \
-git \
-make \
-tree \
-build-essential
-```
+Desktop Apps:
 
-
-#### Mounting of Google Drive 
-
-- [Mount and Use Google Drive on Linux](https://linuxhint.com/mount_google_drive_linux_mint/)
+-   Brave Browser
+    ```bash
+    sudo snap install brave
+    ```
+-   Telegram Desktop
+    ```bash
+    sudo snap install telegram-desktop
+    ```
+-   Spotify
+    ```bash
+    sudo snap install spotify
+    ```
+-   Visual Studio Code
+    ```bash
+    sudo snap install code --classic
+    ```
+-   htop
+    ```bash
+    sudo snap install htop
+    ```
+-   tweaks
+    ```bash
+    sudo apt install gnome-tweaks
+    ```
