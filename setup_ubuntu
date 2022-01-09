@@ -36,6 +36,8 @@ make \
 cmake \
 golang-go \
 python3-dev \
+python3-testresources \
+python3-pip \
 build-essential > /dev/null; } || { echo "Failed" >&2;exit 1; }
 p_success "Done"
 

@@ -104,6 +104,10 @@ Optionally, if you are not sure if the script will deliver what you wanted, you 
         -   [python-mode / python-mode](https://github.com/python-mode/python-mode)
         -   [zxqfl / tabnine-vim](https://github.com/zxqfl/tabnine-vim)
 
+## TODOs
+
+-   [ ] Automate Custom Keybindings for Ubuntu. [Reference](https://askubuntu.com/a/597414)
+
 ## LICENSE
 
 Copyright (c) 2020-2022 Mark Huang - [MIT LICENSE](LICENSE)
