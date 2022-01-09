@@ -49,7 +49,7 @@ case $(uname) in
         ;;
 esac
 
-echo "System identified: ${OS}"
+echo "System identified : ${OS}"
 next
 
 # TODO: general install option on shared public machine
@@ -69,7 +69,7 @@ export TERM=xterm-256color
 
 if [[ $OS == 'macOS' ]]; then
     echo "Setting up dotfiles for macOS..."
-    # ./setup_macOS
+    ./setup_macOS
 elif [[ $OS == 'Ubuntu' ]]; then
     echo "Linux Distro      : ${opsy}"
     echo "CPU Model         : ${cpu_name}"
@@ -78,7 +78,7 @@ elif [[ $OS == 'Ubuntu' ]]; then
     echo "CPU Architecture  : $(uname -m)"
     next
     echo "Setting up dotfiles for Ubuntu..."
-    # ./setup_ubuntu
+    ./setup_ubuntu
 elif [[ $OS == 'Linux' ]]; then
     echo "Aborting: Setup script is tested for Ubuntu only, it may fail on non-ubuntu Linux distro."
     exit 1
