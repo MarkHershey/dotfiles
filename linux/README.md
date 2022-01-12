@@ -26,3 +26,13 @@ Desktop Apps:
     ```bash
     sudo apt install gnome-tweaks
     ```
+-   ffmpeg
+    ```bash
+    sudo apt install ffmpeg
+    ```
+-   [mpv](https://mpv.io/)
+    ```bash
+    sudo add-apt-repository ppa:mc3man/mpv-tests && \
+    sudo apt update && \
+    sudo apt install mpv
+    ```
