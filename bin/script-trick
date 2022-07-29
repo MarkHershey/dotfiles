@@ -1,0 +1,25 @@
+#!/bin/sh
+# shellcheck disable=all
+# Ref: https://github.com/pypa/installer/pull/4#issuecomment-623668717
+
+''':'
+PATH=$PATH:/usr/local/bin
+PYTHON=`command -v python3`
+
+if [ -z "$PYTHON" ]; then
+    PYTHON=`command -v python`
+fi
+if [ -z "$PYTHON" ]; then
+    PYTHON=`command -v python2`
+fi
+if [ -z "$PYTHON" ]; then
+    echo "Python not available, please install Python 3"
+    exit 1
+fi
+echo "Using Python: $PYTHON"
+exec "$PYTHON" "$0" "$@"
+exit $?
+''' #'''
+# import sys
+# print(sys.argv)
+print("Hello World")
