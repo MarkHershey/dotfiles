@@ -1,6 +1,6 @@
 # Dotfiles
 
-_personal dotfiles & quick machine setup scripts_
+_Automated dotfiles install & automated macOS/ Ubuntu setup scripts_
 
 ![](https://github.com/MarkHershey/dotfiles/workflows/Shellcheck/badge.svg?branch=master)
 ![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu/badge.svg?branch=master)
@@ -12,8 +12,6 @@ It's a good idea to use a version control system (VCS) like `git` to manage your
 The install script is **idempotent**, meaning that you could run the script repeatedly without causing any side effects.
 
 Hope this repository gives you inspiration.
-
----
 
 ## Run the Script
 
