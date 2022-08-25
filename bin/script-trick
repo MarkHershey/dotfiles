@@ -8,9 +8,13 @@ PYTHON=`command -v python3`
 
 if [ -z "$PYTHON" ]; then
     PYTHON=`command -v python`
+    echo "Please install Python 3"
+    exit 1
 fi
 if [ -z "$PYTHON" ]; then
     PYTHON=`command -v python2`
+    echo "Please install Python 3"
+    exit 1
 fi
 if [ -z "$PYTHON" ]; then
     echo "Python not available, please install Python 3"
