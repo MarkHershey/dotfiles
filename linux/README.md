@@ -10,6 +10,10 @@ Desktop Apps:
     ```bash
     sudo snap install telegram-desktop
     ```
+-   1 Password
+    ```bash
+    sudo snap install 1password
+    ```
 -   Spotify
     ```bash
     sudo snap install spotify
@@ -21,6 +25,10 @@ Desktop Apps:
 -   htop
     ```bash
     sudo snap install htop
+    ```
+-   Terminator
+    ```bash
+    sudo apt install terminator
     ```
 -   tweaks
     ```bash
