@@ -1,0 +1,31 @@
+[global_config]
+  title_hide_sizetext = True
+  title_transmit_fg_color = "#3d3846"
+  title_transmit_bg_color = "#57e389"
+  title_inactive_bg_color = "#77767b"
+  title_use_system_font = False
+  title_font = MesloLGS NF Italic 10
+[keybindings]
+  split_horiz = <Primary>s
+  split_vert = <Primary>d
+  close_term = <Primary>w
+  paste = <Primary>v
+  new_window = <Primary><Super>a
+[profiles]
+  [[default]]
+    background_color = "#282828"
+    cursor_color = "#aaaaaa"
+    font = MesloLGS NF 10
+    foreground_color = "#ebdbb2"
+    scrollback_infinite = True
+    use_system_font = False
+    bold_is_bright = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]

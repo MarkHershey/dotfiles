@@ -125,7 +125,11 @@ link_dotfile "vim/vimrc"             ".vimrc"             || exitcode=1
 link_dotfile "git/gitconfig"         ".gitconfig"         || exitcode=1
 
 mkdir -p "${HOME}/.config/git/"
-link_dotfile "git/gitignore"         ".config/git/ignore" || exitcode=1
+link_dotfile "git/gitignore"         ".config/git/ignore"        || exitcode=1
+
+mkdir -p "${HOME}/.config/terminator/"
+link_dotfile "terminator/config"     ".config/terminator/config" || exitcode=1
+
 
 # ----------------------------------------------------
 # Vim plugins

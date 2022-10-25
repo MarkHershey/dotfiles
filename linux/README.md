@@ -1,40 +1,18 @@
 ## Ubuntu Setup
 
-Desktop Apps:
+### Desktop Apps:
 
--   Brave Browser
-    ```bash
-    sudo snap install brave
-    ```
--   Telegram Desktop
-    ```bash
-    sudo snap install telegram-desktop
-    ```
--   1 Password
-    ```bash
-    sudo snap install 1password
-    ```
--   Spotify
-    ```bash
-    sudo snap install spotify
-    ```
--   Visual Studio Code
-    ```bash
-    sudo snap install code --classic
-    ```
--   htop
-    ```bash
-    sudo snap install htop
-    ```
--   Terminator
-    ```bash
-    sudo apt install terminator
-    ```
--   tweaks
-    ```bash
-    sudo apt install gnome-tweaks
-    ```
--   ffmpeg
+To install `brave`, `telegram`, `slack`, `1password`, `spotify`, `vscode`, `htop`, `terminator`, `tweaks`.
+
+Run the following script:
+
+```bash
+sudo bash ./install-apps.sh
+```
+
+Others
+
+-   [ffmpeg](https://ffmpeg.org/)
     ```bash
     sudo apt install ffmpeg
     ```
