@@ -69,12 +69,6 @@ Optionally, if you are not sure if the script will deliver what you wanted, you 
     docker run -it ubuntu-dev
     ```
 
--   Alternatively, directly run the pre-built image
-
-    ```bash
-    docker run -it --rm markhersheydev/ubuntu-dev
-    ```
-
 ## What is included?
 
 -   [`zsh`](https://en.wikipedia.org/wiki/Z_shell)

@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 
-LABEL maintainer="Mark He Huang <mark.h.huang@gmail.com>"
+LABEL maintainer="Mark He Huang <dev@markhh.com>"
 
 USER root 
 
