@@ -108,4 +108,4 @@ Optionally, if you are not sure if the script will deliver what you wanted, you 
 
 ## LICENSE
 
-Copyright (c) 2020-2022 Mark Huang - [MIT LICENSE](LICENSE)
+Copyright (c) 2020-2023 Mark Huang - [MIT LICENSE](LICENSE)
