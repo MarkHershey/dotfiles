@@ -1,6 +1,6 @@
 ## Ubuntu Setup
 
-### Desktop Apps:
+### GUI Desktop Apps:
 
 To install `brave`, `telegram`, `slack`, `1password`, `spotify`, `vscode`, `htop`, `terminator`, `tweaks`.
 
@@ -10,7 +10,7 @@ Run the following script:
 sudo bash ./install-apps.sh
 ```
 
-Others
+### Some others:
 
 -   [ffmpeg](https://ffmpeg.org/)
     ```bash
@@ -22,3 +22,8 @@ Others
     sudo apt update && \
     sudo apt install mpv
     ```
+
+### Some handy scripts:
+
+-   [enable-ssh.sh](enable-ssh.sh)
+-   [batch-create-users.sh](batch-create-users.sh)
