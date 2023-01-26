@@ -19,12 +19,12 @@ nmcli con modify $SSID 802-1x.phase2-auth mschapv2
 nmcli con modify $SSID 802-1x.identity $USERNAME
 nmcli con modify $SSID 802-1x.password $PASSWORD
 nmcli con modify $SSID connection.autoconnect yes
-nmcli con modify SUTD_Wifi 802-1x.anonymous-identity $anonymous_identity
-nmcli con modify SUTD_Wifi 802-1x.domain-suffix-match $DOMAIN
-# nmcli connection modify SUTD_Wifi wifi-sec.auth-alg open
+nmcli con modify $SSID 802-1x.anonymous-identity $anonymous_identity
+nmcli con modify $SSID 802-1x.domain-suffix-match $DOMAIN
+# nmcli con modify $SSID wifi-sec.auth-alg open
 
-nmcli con modify SUTD_Wifi ipv4.method auto
-nmcli con modify SUTD_Wifi ipv6.method auto
+nmcli con modify $SSID ipv4.method auto
+nmcli con modify $SSID ipv6.method auto
 
 # Restart the NetworkManager service to apply the changes
 sudo systemctl restart NetworkManager
