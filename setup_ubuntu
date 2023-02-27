@@ -137,17 +137,23 @@ link_dotfile "terminator/config"     ".config/terminator/config" || exitcode=1
 
 p_header "Install Vundle"
 TMP_INSTALL_PATH="${HOME}/.vim/bundle/Vundle.vim"
-if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+
+# Check VundleVim URL
+if curl --output /dev/null --silent --head --fail "https://github.com/VundleVim/Vundle.vim"; then
+    # Add your commands for section A here
+    if [[ ! -d "${TMP_INSTALL_PATH}" ]]; then
+        git clone https://github.com/VundleVim/Vundle.vim.git "${TMP_INSTALL_PATH}" || { echo "Failed" >&2;exit 1; }
+        p_success "Done"
+    else
+        p_success "Vundle already installed."
+    fi
+
+    p_header "Install Vim plugins via Vundle"
+    vim +PluginInstall +qall > /dev/null || { echo "Failed" >&2;exit 1; }
     p_success "Done"
 else
-    p_success "Vundle already installed."
+    echo "The VundleVim URL is not valid. Skipping VundleVim."
 fi
-
-
-p_header "Install Vim plugins via Vundle"
-vim +PluginInstall +qall > /dev/null || { echo "Failed" >&2;exit 1; }
-p_success "Done"
 
 
 # ----------------------------------------------------
