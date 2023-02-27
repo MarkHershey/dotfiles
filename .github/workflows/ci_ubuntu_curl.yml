@@ -17,6 +17,7 @@ jobs:
       - name: Run Curl Install Script
         run: |
           pwd
+          git config credential.https://github.com.username GitHubActions
           set -euo pipefail
           export TERM=xterm-256color
           mkdir TEST && cd TEST
