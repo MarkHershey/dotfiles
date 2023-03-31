@@ -82,6 +82,7 @@ plugins=(
   docker
   colorize
   sudo
+  extract
   command-not-found
   zsh-completions
   zsh-autosuggestions
