@@ -79,10 +79,13 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   git
+  gitignore
   docker
+  copypath
   colorize
   sudo
   extract
+  web-search
   command-not-found
   zsh-completions
   zsh-autosuggestions
