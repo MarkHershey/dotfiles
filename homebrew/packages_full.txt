@@ -9,4 +9,5 @@ golang
 python3
 pygments
 ffmpeg
+neofetch
 youtube-dl
