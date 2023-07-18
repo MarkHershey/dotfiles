@@ -3,7 +3,8 @@
 #####################################################################
 # This script is used to setup a wired connection with 802.1X security
 # Author: Mark H. Huang <dev at markhh dot com>
-# 
+# Date: 2023-07-18
+#
 # This script assumes that 
 #   1. you are running Ubuntu 
 #   2. you have already installed NetworkManager
@@ -12,7 +13,7 @@
 # Variables
 CONNECTION_NAME="REPLACE_ME"
 INTERFACE_NAME="REPLACE_ME" # check 'nmcli device status'
-ANONYMOUS_IDENTITY="1000000"
+ANONYMOUS_IDENTITY="REPLACE_ME"
 
 IDENTITY="REPLACE_ME"
 PASSWORD="REPLACE_ME"
