@@ -1,29 +1,32 @@
-## Ubuntu Setup
+# Some handy scripts for Linux (mostly Ubuntu)
 
-### GUI Desktop Apps:
+### Check basic system info
 
-To install `brave`, `telegram`, `slack`, `1password`, `spotify`, `vscode`, `htop`, `terminator`, `tweaks`.
+[check-system.sh](check-system.sh)
 
-Run the following script:
+### Install some desktop apps
+
+[install-apps.sh](install-apps.sh)
+
+### Enable SSH server
+
+[enable-ssh.sh](enable-ssh.sh)
+
+### Create a list of user accounts
+
+[create-users.sh](create-users.sh)
+
+### Check existing user accounts from a list of machines
+
+[check-users.py](check-users.py)
+
+pre-requisites: `paramiko`, `numpy`
 
 ```bash
-sudo bash ./install-apps.sh
+python3 check-users.py
 ```
 
-### Some others:
+### Setup WPA2 Enterprise Network
 
--   [ffmpeg](https://ffmpeg.org/)
-    ```bash
-    sudo apt install ffmpeg
-    ```
--   [mpv](https://mpv.io/)
-    ```bash
-    sudo add-apt-repository ppa:mc3man/mpv-tests && \
-    sudo apt update && \
-    sudo apt install mpv
-    ```
-
-### Some handy scripts:
-
--   [enable-ssh.sh](enable-ssh.sh)
--   [batch-create-users.sh](batch-create-users.sh)
+-   [setup-wifi.sh](setup-wifi.sh)
+-   [setup-wired.sh](setup-wired.sh)

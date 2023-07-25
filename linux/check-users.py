@@ -1,8 +1,8 @@
+import csv
 import json
 
-import paramiko
 import numpy as np
-import csv
+import paramiko
 
 
 def print_red(text):
