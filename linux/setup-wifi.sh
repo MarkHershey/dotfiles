@@ -25,15 +25,8 @@ ANONYMOUS_IDENTITY="REPLACE_ME"
 # Add new Wi-Fi connection
 nmcli con add con-name $CONNECTION_NAME type wifi ifname $INTERFACE_NAME ssid $SSID
 
-# Set Wi-Fi security options
-nmcli con modify $CONNECTION_NAME wifi-sec.key-mgmt wpa-eap
-
-# Set 802.1x security options
-nmcli con modify $CONNECTION_NAME 802-1x.eap $EAP_METHOD
-nmcli con modify $CONNECTION_NAME 802-1x.phase2-auth $PHASE2_AUTH
-nmcli con modify $CONNECTION_NAME 802-1x.domain-suffix-match $DOMAIN
-nmcli con modify $CONNECTION_NAME 802-1x.identity $IDENTITY
-nmcli con modify $CONNECTION_NAME 802-1x.password $PASSWORD
+# Configure 802.1X security
+nmcli con modify $CONNECTION_NAME wifi-sec.key-mgmt wpa-eap 802-1x.eap $EAP_METHOD 802-1x.phase2-auth $PHASE2_AUTH 802-1x.domain-suffix-match $DOMAIN 802-1x.identity $IDENTITY 802-1x.password $PASSWORD 802-1x.anonymous-identity $ANONYMOUS_IDENTITY
 
 # Enable automatic connection on startup
 nmcli con modify $CONNECTION_NAME connection.autoconnect yes
