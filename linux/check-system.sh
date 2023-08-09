@@ -4,6 +4,43 @@ next() {
     printf "%-70s\n" "-" | sed 's/\s/-/g'
 }
 
+check_internet_connection() {
+    if ping -c 1 google.com &> /dev/null; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+get_human_readable_uptime() {
+    local uptime_seconds
+    uptime_seconds=$(cut -d " " -f 1 /proc/uptime)
+    uptime_seconds=${uptime_seconds%.*}  # Convert to integer
+    
+    local seconds=$((uptime_seconds % 60))
+    local minutes=$((uptime_seconds / 60 % 60))
+    local hours=$((uptime_seconds / 3600 % 24))
+    local days=$((uptime_seconds / 86400))
+    
+    local uptime_string=""
+    
+    if [ "$days" -gt 0 ]; then
+        uptime_string+="${days}d "
+    fi
+    
+    if [ "$hours" -gt 0 ]; then
+        uptime_string+="${hours}h "
+    fi
+    
+    if [ "$minutes" -gt 0 ]; then
+        uptime_string+="${minutes}m "
+    fi
+    
+    uptime_string+="${seconds}s"
+    
+    echo "$uptime_string"
+}
+
 case $(uname) in
     'Darwin') 
         OS='macOS'
@@ -31,6 +68,8 @@ case $(uname) in
             gpu_mem=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits | awk '{sum += $1} END {printf "%.0f\n", sum/1024}')
             gpu_driver=$( nvidia-smi --query-gpu=driver_version --format=csv,noheader | uniq )
         fi
+        # get system uptime
+        uptime=$( get_human_readable_uptime )
         ;;
     'FreeBSD')
         OS='FreeBSD'
@@ -52,12 +91,13 @@ esac
 
 export TERM=xterm-256color
 
-echo "System Identified : ${OS}"
+echo "System Type       : ${OS}"
 
 if [[ $OS == 'Linux' ]]; then
-    echo "Kernel Version    : ${kernel_version}"
-    next
+    echo "System Uptime     : ${uptime}"
+    echo "Linux Kernel      : ${kernel_version}"
     echo "Linux Distro      : ${distro}"
+    next
     echo "CPU Model         : ${cpu_name}"
     echo "CPU Cores         : ${cpu_cores}"
     echo "CPU Architecture  : ${arch}"
@@ -75,5 +115,11 @@ if [[ $OS == 'Linux' ]]; then
         echo "GPU Memory        : ${gpu_mem} GB (Total)"
         echo "GPU Driver        : ${gpu_driver}"
         next
+    fi
+
+    if check_internet_connection; then
+        echo "Internet Access   : Not Connected"
+    else
+        echo "Internet Access   : Connected"
     fi
 fi
