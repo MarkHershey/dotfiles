@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #####################################################################
 # This script is used to setup a wireless connection with 802.1X security

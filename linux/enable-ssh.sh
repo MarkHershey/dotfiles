@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if SSH service is installed
 if ! dpkg -s openssh-server &> /dev/null; then

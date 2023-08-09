@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #####################################################################
 # This script is used to setup a wired connection with 802.1X security
