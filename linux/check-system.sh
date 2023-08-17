@@ -68,7 +68,7 @@ case $(uname) in
         cpu_cores=$( awk -F: '/processor/ {core++} END {print core}' /proc/cpuinfo )
         arch=$( uname -m )
         total_mem=$( free -g | awk '/^Mem:/ {print $2}' )
-        free_mem=$( free -g | awk '/^Mem:/ {print $4}' )
+        available_mem=$( free -g | awk '/^Mem:/ {print $7}' )
         total_space=$( df -h --total | grep 'total' | awk '{print $2}' )
         free_space=$( df -h --total | grep 'total' | awk '{print $4}' )
         num_users=$( awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l )
@@ -117,7 +117,7 @@ if [[ $OS == 'Linux' ]]; then
     echo "CPU Cores/Threads : ${cpu_cores}"
     echo "CPU Architecture  : ${arch}"
     echo "Total Memory      : ${total_mem}G"
-    echo "Available Memory  : ${free_mem}G"
+    echo "Available Memory  : ${available_mem}G"
     echo "Total Storage     : ${total_space}"
     echo "Available Storage : ${free_space}"
     next
