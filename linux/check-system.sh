@@ -41,6 +41,18 @@ get_human_readable_uptime() {
     echo "$uptime_string"
 }
 
+get_timezone() {
+    local timezone
+    if [ -f /etc/timezone ]; then
+        timezone=$(cat /etc/timezone)
+    elif [ -h /etc/localtime ]; then
+        timezone=$(readlink /etc/localtime | sed 's|.*/zoneinfo/||')
+    else
+        timezone=$(date +%Z)
+    fi
+    echo "$timezone"
+}
+
 case $(uname) in
     'Darwin') 
         OS='macOS'
@@ -50,6 +62,8 @@ case $(uname) in
         # get system information
         kernel_version=$( uname -r )
         distro=$( echo $(grep '^NAME=' /etc/*-release | cut -d'=' -f2 | tr -d '"')  $(grep '^VERSION=' /etc/*-release | cut -d'=' -f2 | tr -d '"') )
+        timezone=$( get_timezone )
+        timestamp=$( date +"%Y-%m-%d %T" )
         cpu_name=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
         cpu_cores=$( awk -F: '/processor/ {core++} END {print core}' /proc/cpuinfo )
         arch=$( uname -m )
@@ -60,6 +74,7 @@ case $(uname) in
         num_users=$( awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l )
         all_users=$( awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | tr '\n' ' ' )
         online_users=$( who | awk '{print $1}' | sort -u | tr '\n' ' ' )
+        sudo_users=$( grep -Po '^sudo.+:\K.*$' /etc/group | tr ',' ' ' )
         # check if nvidia-smi is installed
         if [ -x "$(command -v nvidia-smi)" ]; then
             gpu_name=$( nvidia-smi --query-gpu=name --format=csv,noheader | uniq )
@@ -99,7 +114,7 @@ if [[ $OS == 'Linux' ]]; then
     echo "Linux Distro      : ${distro}"
     next
     echo "CPU Model         : ${cpu_name}"
-    echo "CPU Cores         : ${cpu_cores}"
+    echo "CPU Cores/Threads : ${cpu_cores}"
     echo "CPU Architecture  : ${arch}"
     echo "Total Memory      : ${total_mem}G"
     echo "Available Memory  : ${free_mem}G"
@@ -109,6 +124,7 @@ if [[ $OS == 'Linux' ]]; then
     echo "Number of Users   : ${num_users}"
     echo "All Users         : ${all_users}"
     echo "Online Users      : ${online_users}"
+    echo "Previleged Users  : ${sudo_users}"
     next
     if [[ -x "$(command -v nvidia-smi)" ]]; then
         echo "GPU Model         : ${gpu_name} (x${gpu_count})"
@@ -117,6 +133,8 @@ if [[ $OS == 'Linux' ]]; then
         next
     fi
 
+    echo "Machine Timezone  : ${timezone}"
+    echo "Machine Time Now  : ${timestamp}"
     if check_internet_connection; then
         echo "Internet Access   : Not Connected"
     else
