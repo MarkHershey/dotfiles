@@ -76,7 +76,13 @@ case $(uname) in
         online_users=$( who | awk '{print $1}' | sort -u | tr '\n' ' ' )
         sudo_users=$( grep -Po '^sudo.+:\K.*$' /etc/group | tr ',' ' ' )
         # check if nvidia-smi is installed
-        if [ -x "$(command -v nvidia-smi)" ]; then
+        if command -v nvidia-smi >/dev/null 2>&1 && nvidia-smi >/dev/null 2>&1; then
+            gpu_ok=true
+        else
+            gpu_ok=false
+        fi
+
+        if [ "$gpu_ok" = true ]; then
             gpu_name=$( nvidia-smi --query-gpu=name --format=csv,noheader | uniq )
             gpu_count=$( nvidia-smi --query-gpu=count --format=csv,noheader | uniq )
             # get gpu memory total in GB (rounded)
@@ -126,7 +132,7 @@ if [[ $OS == 'Linux' ]]; then
     echo "Online Users      : ${online_users}"
     echo "Previleged Users  : ${sudo_users}"
     next
-    if [[ -x "$(command -v nvidia-smi)" ]]; then
+    if [ "$gpu_ok" = true ]; then
         echo "GPU Model         : ${gpu_name} (x${gpu_count})"
         echo "GPU Memory        : ${gpu_mem} GB (Total)"
         echo "GPU Driver        : ${gpu_driver}"
