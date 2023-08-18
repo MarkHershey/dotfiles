@@ -80,6 +80,7 @@ case $(uname) in
             gpu_ok=true
         else
             gpu_ok=false
+            gpu_msg="No NVIDIA GPU / NVIDIA driver error"
         fi
 
         if [ "$gpu_ok" = true ]; then
@@ -136,6 +137,9 @@ if [[ $OS == 'Linux' ]]; then
         echo "GPU Model         : ${gpu_name} (x${gpu_count})"
         echo "GPU Memory        : ${gpu_mem} GB (Total)"
         echo "GPU Driver        : ${gpu_driver}"
+        next
+    else
+        echo "GPU               : ${gpu_msg}"
         next
     fi
 
