@@ -130,6 +130,7 @@ export GPG_TTY=$(tty)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias open="xdg-open" # if using Linux
+alias pip="pip3"
 alias python="python3"
 alias ib="isort ./*.py && black ./*.py"
 
