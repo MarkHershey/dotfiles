@@ -70,7 +70,7 @@ case $(uname) in
         total_mem=$( free -g | awk '/^Mem:/ {print $2}' )
         available_mem=$( free -g | awk '/^Mem:/ {print $7}' )
         total_space=$( df -h --total | grep 'total' | awk '{print $2}' )
-        free_space=$( df -h --total | grep 'total' | awk '{print $4}' )
+        free_space=$( df -h -x tmpfs -x squashfs -x devtmpfs -x vfat -x efivarfs --total | grep 'total' | awk '{print $4}' )
         num_users=$( awk -F: '$3 >= 1000 && $3 <= 60000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l )
         all_users=$( awk -F: '$3 >= 1000 && $3 <= 60000 && $1 != "nobody" {print $1}' /etc/passwd | tr '\n' ' ' )
         online_users=$( who | awk '{print $1}' | sort -u | tr '\n' ' ' )
