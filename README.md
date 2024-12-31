@@ -2,10 +2,10 @@
 
 _Automated dotfiles install & automated macOS/ Ubuntu setup scripts_
 
-![](https://github.com/MarkHershey/dotfiles/workflows/Shellcheck/badge.svg?branch=master)
-![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu/badge.svg?branch=master)
-![](https://github.com/MarkHershey/dotfiles/workflows/CI-ubuntu-curl/badge.svg?branch=master)
-![](https://github.com/MarkHershey/dotfiles/workflows/CI-macOS/badge.svg?branch=master)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MarkHershey/dotfiles/shellcheck.yml?style=flat-square&label=ShellCheck)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MarkHershey/dotfiles/ci_ubuntu.yml?style=flat-square&label=CI-Ubuntu)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MarkHershey/dotfiles/ci_ubuntu_curl.yml?style=flat-square&label=CI-Ubuntu-Curl)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MarkHershey/dotfiles/ci_macos.yml?style=flat-square&label=CI-macOS)
 
 It's a good idea to use a version control system (VCS) like `git` to manage your dotfiles in one place and a script to bootstrap all your dotfiles, so that every time you set up a new machine or a remote server, you just need to clone the repository and run the `./install` script.
 
