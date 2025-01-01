@@ -1,7 +1,7 @@
 [user]
-	name = Mark Huang
-	email = hhzeos@gmail.com
-	signingkey = 8E9EA933F9D5DB7E
+	name = Mark H. Huang
+	email = dev@markhh.com
+	signingkey = 2728B7F9DA2ACB38
 [alias]
 	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%as)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
 [pull]
