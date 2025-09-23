@@ -140,6 +140,9 @@ alias ib="isort ./*.py && black ./*.py"
 # Disable setup wizard from auto starting
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
+# GPG TTY
+export GPG_TTY=$(tty)
+
 # Source .zprofile if any
 [[ ! -f "${HOME}/.zprofile" ]] || source "${HOME}/.zprofile"
 
