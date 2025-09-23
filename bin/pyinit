@@ -1,63 +1,189 @@
 #!/usr/bin/env bash
 
-# check dir 'venv' does not exist
-printf ">>> Checking current directory... \n"
-if [ -d "venv" ]; then
-    create_venv=0
-    printf ">>> dir 'venv' already exists. \n"
-else
-    create_venv=1
-    printf ">>> \xE2\x9C\x94 OK \n"
-fi
+# Exit on error, undefined variables, and pipe failures
+set -euo pipefail
 
-# check python version
-printf "\n>>> Checking Python version... \n"
-version=$(python -V)
-if [[ "$version" == "Python 3."* ]]; then
-    printf ">>> \xE2\x9C\x94 OK %s() \n" "$version"
-    use_python=1
-else
-    use_python=0
-    version=$(python3 -V)
-    if [[ "$version" == "Python 3."* ]]; then
-        printf ">>> \xE2\x9C\x94 OK %s() \n" "$version"
-    else
-        printf ">>> Error: Python 3.x not found."
-        printf ">>> Aborting... \n"
-        exit 1
+# Default values
+VENV_NAME="venv"
+PYTHON_CMD=""
+
+# Colors and symbols for better output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Logging functions
+log_section() { printf "\n${BLUE}>>> %s${NC}\n" "$1"; }
+log_info() { printf "${BLUE}>>> %s${NC}\n" "$1"; }
+log_success() { printf "${GREEN}✔${NC} %s\n" "$1"; }
+log_warning() { printf "${YELLOW}!${NC} %s\n" "$1"; }
+log_error() { printf "${RED}✘${NC} %s\n" "$1" >&2; }
+
+
+# Error handling
+error_exit() {
+    log_error "$1"
+    exit 1
+}
+
+# Show help
+show_help() {
+    cat << EOF
+Usage: $0 [OPTIONS]
+
+Initialize a Python virtual environment with optional dependencies.
+
+OPTIONS:
+    -n, --name NAME     Virtual environment name (default: venv)
+    -p, --python CMD    Python command to use (default: auto-detect)
+    -h, --help          Show this help message
+
+EXAMPLES:
+    $0                  # Create 'venv' with auto-detected Python
+    $0 -n myenv         # Create 'myenv' virtual environment
+    $0 -p python3.9     # Use specific Python version
+
+EOF
+}
+
+# Parse command line arguments
+parse_args() {
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -n|--name)
+                VENV_NAME="$2"
+                shift 2
+                ;;
+            -p|--python)
+                PYTHON_CMD="$2"
+                shift 2
+                ;;
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            *)
+                error_exit "Unknown option: $1. Use -h for help."
+                ;;
+        esac
+    done
+}
+
+# Find suitable Python command
+find_python() {
+    if [[ -n "$PYTHON_CMD" ]]; then
+        if command -v "$PYTHON_CMD" >/dev/null 2>&1; then
+            if "$PYTHON_CMD" -c "import sys; exit(0 if sys.version_info >= (3, 6) else 1)" 2>/dev/null; then
+                echo "$PYTHON_CMD"
+                return 0
+            else
+                error_exit "Python command '$PYTHON_CMD' is not Python 3.6+"
+            fi
+        else
+            error_exit "Python command '$PYTHON_CMD' not found"
+        fi
     fi
-fi
 
-# use python 3 create virtual environment
-if [ "$create_venv" -eq 1 ]; then
-    if [ "$use_python" -eq 1 ]; then
-        printf "\n>>> python -m venv venv \n"
-        python -m venv venv || exit 1
-    else
-        printf "\n>>> python3 -m venv venv \n"
-        python3 -m venv venv || exit 1
+    # Auto-detect Python
+    for cmd in python3 python; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            if "$cmd" -c "import sys; exit(0 if sys.version_info >= (3, 6) else 1)" 2>/dev/null; then
+                echo "$cmd"
+                return 0
+            fi
+        fi
+    done
+    
+    error_exit "Python 3.6+ not found. Please install Python or specify with -p"
+}
+
+# Check if virtual environment already exists
+check_existing_venv() {
+    if [[ -d "$VENV_NAME" ]]; then
+        log_success "Virtual environment '$VENV_NAME' already exists - skipping creation"
+        return 1
     fi
-    printf ">>> \xE2\x9C\x94 OK \n"
-fi
+    return 0
+}
 
+# Create virtual environment
+create_virtualenv() {
+    local python_cmd="$1"
+    log_section "Creating virtual environment '$VENV_NAME' with $python_cmd"
+    
+    if "$python_cmd" -m venv "$VENV_NAME"; then
+        log_success "Virtual environment created successfully"
+    else
+        error_exit "Failed to create virtual environment"
+    fi
+}
 
-# activate the virtual environment
-source venv/bin/activate
+# Activate virtual environment and upgrade pip
+setup_environment() {
+    log_section "Activating virtual environment and upgrading pip"
+    
+    # Activate virtual environment
+    source "$VENV_NAME/bin/activate"
+    
+    # Upgrade pip, wheel, and setuptools
+    if pip install --upgrade pip wheel setuptools >/dev/null 2>&1; then
+        log_success "pip, wheel, and setuptools upgraded"
+    else
+        log_warning "Failed to upgrade pip packages (continuing anyway)"
+    fi
+}
 
-# update pip
-printf "\n>>> pip install --upgrade pip wheel setuptools \n"
-pip install --upgrade pip wheel setuptools
+# Install requirements if available
+install_requirements() {
+    if [[ -f "requirements.txt" ]]; then
+        log_section "Installing requirements from requirements.txt"
+        if pip install -r requirements.txt >/dev/null 2>&1; then
+        # if pip install -r requirements.txt; then
+            log_success "Requirements installed successfully"
+        else
+            log_warning "Some requirements failed to install (check output above)"
+        fi
+    else
+        log_warning "No requirements.txt found - skipping dependency installation"
+    fi
+}
 
-printf ">>> \xE2\x9C\x94 OK \n"
+# Main function
+main() {
+    log_info "Python Virtual Environment Initializer"
+    
+    # Parse command line arguments
+    parse_args "$@"
+    
+    # Find Python command
+    python_cmd=$(find_python)
+    log_success "Using: $python_cmd ($($python_cmd --version))"
+    
+    # Check for existing virtual environment
+    if check_existing_venv; then
+        # Create virtual environment
+        create_virtualenv "$python_cmd"
+        
+        # Setup environment
+        setup_environment
+        
+        # Install requirements
+        install_requirements
+        
+        log_success "Virtual environment '$VENV_NAME' is ready! To activate: source $VENV_NAME/bin/activate"
+    else
+        # Setup environment
+        setup_environment
+        
+        # Install requirements
+        install_requirements
+        
+        log_success "Virtual environment '$VENV_NAME' is ready! To activate: source $VENV_NAME/bin/activate"
+    fi
+}
 
-# check file 'requirements.txt' exist
-if [ -f "requirements.txt" ]; then
-    # install requirements
-    printf "\n>>> pip install -r requirements.txt \n"
-    pip install -r requirements.txt
-else
-    printf "\n>>> 'requirements.txt' does not exist \n"
-fi
-printf ">>> \xE2\x9C\x94 OK \n"
-
-printf "\n>>> \xE2\x9C\x94 Done! \n\n"
+# Run main function with all arguments
+main "$@"
