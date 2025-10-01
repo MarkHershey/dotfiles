@@ -4,6 +4,11 @@ set -euo pipefail
 AUDIT_DIR="/var/log/audit"
 AUDIT_CONF="/etc/audit/auditd.conf"
 
+# Require root (avoid noisy permission-denied when not sudo)
+if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
+  echo "This script must be run as root (try: sudo $0)"; exit 1
+fi
+
 # Sanity checks
 if [[ ! -d "$AUDIT_DIR" ]]; then
   echo "Audit directory $AUDIT_DIR not found"; exit 0
@@ -39,12 +44,11 @@ find "$AUDIT_DIR_REAL" -xdev -type f \
 
 # 2) Truncate the active log (if it lives under /var/log/audit)
 if [[ -n "${ACTIVE_LOG_REAL:-}" && -f "$ACTIVE_LOG_REAL" ]]; then
-  # Truncate rather than delete: preserves inode, perms, SELinux context, unit expectations
   : > "$ACTIVE_LOG_REAL" || truncate -s 0 "$ACTIVE_LOG_REAL"
 fi
 
 # 3) Remove any now-empty subdirectories (but keep the top-level directory)
-find "$AUDIT_DIR_REAL" -xdev -type d -mindepth 1 -empty -delete
+#    NOTE: move -mindepth before tests to avoid find(1) warning
+find "$AUDIT_DIR_REAL" -xdev -mindepth 1 -type d -empty -delete
 
 exit 0
-
